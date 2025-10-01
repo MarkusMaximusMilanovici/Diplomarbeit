@@ -13,4 +13,4 @@
 
 ### Erkenntnisse
  - Da wir uns bei der Wahl der LEDs die wir kaufen umentschieden haben wurde die Größe des Cases angepasst
- - - Von 32 * 48 zu 51,2*29 da wir die LEDs in 4er Blöcken Kaufen
+ - - Von 32 * 48 zu 51,2 * 29 cm da wir die LEDs in 4er Blöcken Kaufen
