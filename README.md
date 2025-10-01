@@ -12,4 +12,5 @@
 - Könnte mit extra platz für Komfortablen ein und ausschalter ausgestattet sein
 
 ### Erkenntnisse
- 
+ - Da wir uns bei der Wahl der LEDs die wir kaufen umentschieden haben wurde die Größe des Cases angepasst
+ - - Von 32 * 48 zu 51,2*29 da wir die LEDs in 4er Blöcken Kaufen
