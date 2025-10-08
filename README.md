@@ -14,4 +14,5 @@
 ### Erkenntnisse
  - Da wir uns bei der Wahl der LEDs die wir kaufen umentschieden haben wurde die Größe des Cases angepasst
  - - Von 32 * 48 zu 51,2 * 29 cm da wir die LEDs in 4er Blöcken Kaufen
-- ***Währen des Zeichnens des ersten Grundplanes haben wir entschieden die Halterung der Kamere Extern zu modelieren um ein Einfach An und abbauen zu ermöglichen***
+ - ***Währen des Zeichnens des ersten Grundplanes haben wir entschieden die Halterung der Kamere Extern zu modelieren um ein Einfach An und abbauen zu ermöglichen***
+ - Schrauben wird schwierig Ersatzlösung gesucht
