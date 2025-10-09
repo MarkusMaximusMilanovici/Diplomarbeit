@@ -6,6 +6,7 @@ config = picam2.create_still_configuration()
 
 native_width, native_height = config["main"]["size"]
 print(native_width, native_height)
+picam2.start()
 
 while True:
     frame = picam2.capture_array()
