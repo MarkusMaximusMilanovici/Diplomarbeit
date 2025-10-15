@@ -21,6 +21,6 @@
     - - Kontra: Schwer drinzubehalten und LEDs vertikal zu verbinden 
 -Neuer Ansatz des Cases
 -- Aluminium Rahmen statt 3D drucken da zu groß zum Drucken
---Raspberry pi muss hoch hinten angebracht werden da Kabel der Kamera kürzer als gedacht
+-- Raspberry pi muss hoch hinten angebracht werden da Kabel der Kamera kürzer als gedacht
 -- Schienensystem für LEDs zum rein und ras bringen
 -- Platte zwischen LED Bauteilhälften anbringen für Schienensystem Entwickelt
