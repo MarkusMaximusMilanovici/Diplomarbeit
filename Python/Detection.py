@@ -17,6 +17,8 @@ while True:
 
     frame = picam2.capture_array()
 
+    frame = frame[:, :, 0]
+
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     print(gray)
