@@ -2,7 +2,7 @@ from picamera2 import Picamera2
 import cv2
 import numpy as np
 
-face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_fullbody.xml')
+face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_upperbody.xml')
 
 vcap = cv2.VideoCapture()
 
