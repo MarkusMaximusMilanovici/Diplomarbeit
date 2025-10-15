@@ -1,7 +1,7 @@
 from picamera2 import Picamera2
 import cv2
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalcatface_extended.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalcatface.xml')
 
 vcap = cv2.VideoCapture()
 
