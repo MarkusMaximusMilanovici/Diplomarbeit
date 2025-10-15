@@ -1,5 +1,6 @@
 from picamera2 import Picamera2
 import cv2
+import numpy as np
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalcatface.xml')
 
@@ -17,7 +18,7 @@ while True:
 
     frame = picam2.capture_array()
 
-    frame = frame[:, :, 0]
+    frame[:, :, 2] = (frame[:, :, 2] * 0.5).astype(np.uint8)
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
