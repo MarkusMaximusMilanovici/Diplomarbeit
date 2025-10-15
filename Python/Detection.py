@@ -22,7 +22,7 @@ while True:
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    print(gray)
+    # print(gray)
 
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
 
