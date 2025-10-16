@@ -2,32 +2,48 @@ import cv2
 import numpy as np
 from picamera2 import Picamera2
 
+# --- Initialize camera ---
 cam = Picamera2()
 config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
 cam.start()
 
+# --- Background subtractor (detects motion / people) ---
+fgbg = cv2.createBackgroundSubtractorMOG2(history=300, varThreshold=40, detectShadows=False)
+
 while True:
     frame = cam.capture_array()
 
-    # Ensure it’s 3-channel BGR
-    if frame.ndim == 2:  # grayscale
+    # Ensure BGR format
+    if frame.ndim == 2:
         frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-    elif frame.shape[2] == 4:  # sometimes RGBA
+    elif frame.shape[2] == 4:
         frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
 
+    # Convert to grayscale for analysis
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blurred = cv2.GaussianBlur(gray, (5, 5), 1.4)
 
-    edges = cv2.Canny(blurred, 20, 60)
-    edge_bgr = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+    # Apply background subtraction → mask of moving objects (likely person)
+    fgmask = fgbg.apply(gray)
 
-    # Resize to match just in case (avoid size mismatch error)
-    edge_bgr = cv2.resize(edge_bgr, (frame.shape[1], frame.shape[0]))
+    # Clean up noise with morphological operations
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
+    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
+    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_DILATE, kernel)
 
-    outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.7, 0)
+    # Edge detection (on the whole frame)
+    edges = cv2.Canny(gray, 25, 75)
 
-    cv2.imshow("Edges", edge_bgr)
+    # Keep only edges inside the moving region
+    person_edges = cv2.bitwise_and(edges, edges, mask=fgmask)
+
+    # Convert edges to color for display
+    edge_bgr = cv2.cvtColor(person_edges, cv2.COLOR_GRAY2BGR)
+
+    # Optional: overlay edges on the original frame
+    outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.8, 0)
+
+    cv2.imshow("Person Edges (OpenCV only)", outlined)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
