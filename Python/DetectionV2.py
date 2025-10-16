@@ -9,7 +9,7 @@ cam.configure(config)
 cam.start()
 
 # --- Background subtractor (detects motion / people) ---
-fgbg = cv2.createBackgroundSubtractorMOG2(history=1000, varThreshold=10, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorMOG2(history=400, varThreshold=10, detectShadows=False)
 
 while True:
     frame = cam.capture_array()
