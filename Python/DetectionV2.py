@@ -43,7 +43,8 @@ while True:
     # Optional: overlay edges on the original frame
     outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.8, 0)
 
-    cv2.imshow("Person Edges (OpenCV only)", outlined)
+    cv2.imshow("Edges Only", person_edges)
+
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
