@@ -9,18 +9,22 @@ cam.start()
 
 while True:
     frame = cam.capture_array()
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Gaussian blur smooths noise before edge detection
+    # Ensure it’s 3-channel BGR
+    if frame.ndim == 2:  # grayscale
+        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
+    elif frame.shape[2] == 4:  # sometimes RGBA
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 1.4)
 
-    # Canny edge detection
     edges = cv2.Canny(blurred, 60, 150)
-
-    # Convert edges to 3-channel for overlay
     edge_bgr = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
 
-    # Combine original + edges
+    # Resize to match just in case (avoid size mismatch error)
+    edge_bgr = cv2.resize(edge_bgr, (frame.shape[1], frame.shape[0]))
+
     outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.7, 0)
 
     cv2.imshow("Edges", outlined)
