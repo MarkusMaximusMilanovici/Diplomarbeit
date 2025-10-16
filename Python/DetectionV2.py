@@ -19,7 +19,7 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 1.4)
 
-    edges = cv2.Canny(blurred, 40, 100)
+    edges = cv2.Canny(blurred, 20, 60)
     edge_bgr = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
 
     # Resize to match just in case (avoid size mismatch error)
