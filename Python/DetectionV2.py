@@ -26,25 +26,8 @@ while True:
     # Apply background subtraction → mask of moving objects (likely person)
     fgmask = fgbg.apply(gray)
 
-    # Clean up noise with morphological operations
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
-    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
-    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_DILATE, kernel)
-
-    # Edge detection (on the whole frame)
-    edges = cv2.Canny(gray, 25, 75)
-
-    # Keep only edges inside the moving region
-    person_edges = cv2.bitwise_and(edges, edges, mask=fgmask)
-
-    # Convert edges to color for display
-    edge_bgr = cv2.cvtColor(person_edges, cv2.COLOR_GRAY2BGR)
-
-    # Optional: overlay edges on the original frame
-    outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.8, 0)
-
-    cv2.imshow("Edges Only", fgmask)
-
+    # Display the mask directly (white = detected person/motion)
+    cv2.imshow("Person Mask", fgmask)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
