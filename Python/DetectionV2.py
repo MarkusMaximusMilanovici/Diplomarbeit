@@ -2,49 +2,52 @@ import cv2
 import numpy as np
 from picamera2 import Picamera2
 
-# --- Initialize camera ---
 cam = Picamera2()
 config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
 cam.start()
 
-# --- Background subtractor (detects motion / people) ---
-fgbg = cv2.createBackgroundSubtractorMOG2(history=1000, varThreshold=25, detectShadows=False)
+# Background subtractor
+fgbg = cv2.createBackgroundSubtractorMOG2(history=500, varThreshold=50, detectShadows=False)
+
+# For smoothing motion detection
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
 
 while True:
     frame = cam.capture_array()
-
-    # Ensure BGR format
-    if frame.ndim == 2:
-        frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
-    elif frame.shape[2] == 4:
-        frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
-
-    # Convert to grayscale for analysis
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Apply background subtraction → mask of moving objects (likely person)
+    # Apply background subtraction
     fgmask = fgbg.apply(gray)
 
-    # Clean up noise with morphological operations
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
+    # Remove noise and small blobs
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
-    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_DILATE, kernel)
+    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_CLOSE, kernel)
+    fgmask = cv2.dilate(fgmask, kernel, iterations=2)
 
-    # Edge detection (on the whole frame)
+    # Find motion contours (likely people)
+    contours, _ = cv2.findContours(fgmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Create an empty mask for "detected people"
+    motion_mask = np.zeros_like(gray)
+
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 2000:  # ignore tiny noise, adjust threshold as needed
+            x, y, w, h = cv2.boundingRect(cnt)
+            cv2.rectangle(motion_mask, (x, y), (x + w, y + h), 255, -1)
+
+    # Run Canny edge detection on entire frame
     edges = cv2.Canny(gray, 25, 75)
 
-    # Keep only edges inside the moving region
-    person_edges = cv2.bitwise_and(edges, edges, mask=fgmask)
+    # Keep only edges within the motion mask
+    person_edges = cv2.bitwise_and(edges, edges, mask=motion_mask)
 
-    # Convert edges to color for display
+    # Optional: Overlay
     edge_bgr = cv2.cvtColor(person_edges, cv2.COLOR_GRAY2BGR)
+    outlined = cv2.addWeighted(frame, 0.7, edge_bgr, 1.0, 0)
 
-    # Optional: overlay edges on the original frame
-    outlined = cv2.addWeighted(frame, 0.8, edge_bgr, 0.8, 0)
-
-    cv2.imshow("Edges Only", person_edges)
-
+    cv2.imshow("Person Edges (filtered)", outlined)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
