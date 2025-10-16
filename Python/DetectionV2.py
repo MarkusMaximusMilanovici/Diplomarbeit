@@ -8,7 +8,7 @@ cam.configure(config)
 cam.start()
 
 # Background subtractor
-fgbg = cv2.createBackgroundSubtractorMOG2(history=500, varThreshold=50, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorMOG2(history=2000, varThreshold=50, detectShadows=False)
 
 # For smoothing motion detection
 kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
