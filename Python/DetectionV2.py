@@ -25,6 +25,7 @@ while True:
 
     # Apply background subtraction → mask of moving objects (likely person)
     fgmask = fgbg.apply(gray)
+    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
 
     # Display the mask directly (white = detected person/motion)
     cv2.imshow("Person Mask", fgmask)
