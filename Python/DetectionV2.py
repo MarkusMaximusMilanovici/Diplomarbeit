@@ -8,7 +8,6 @@ config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
 cam.start()
 
-
 # --- Background subtractor ---
 fgbg = cv2.createBackgroundSubtractorMOG2(history=400, varThreshold=10, detectShadows=False)
 
