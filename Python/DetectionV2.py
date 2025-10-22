@@ -12,8 +12,8 @@ cam.start()
 fgbg = cv2.createBackgroundSubtractorMOG2(history=400, varThreshold=10, detectShadows=False)
 
 # Morphologische Kernel (Größe kann angepasst werden)
-kernel_erode = np.ones((5, 5), np.uint8)
-kernel_dilate = np.ones((15, 15), np.uint8)
+kernel_erode = np.ones((3, 3), np.uint8)
+kernel_dilate = np.ones((13, 13), np.uint8)
 
 while True:
     frame = cam.capture_array()
