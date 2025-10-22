@@ -10,10 +10,16 @@ def noop():
 spi.xfer2([0x9, 0]) # Decode 0
 noop()
 spi.xfer2([0xA, 0x7]) # Intensity 15/32
+noop()
 spi.xfer2([0xB, 0x7]) # Scan limit 8 digits
+noop()
 spi.xfer2([0xC, 1]) # Shutdown Normal Operation
+noop()
 spi.xfer2([0xF, 1]) # Display Test On
+noop()
 time.sleep(3)
 spi.xfer2([0xF, 0]) # Display Test Off
+noop()
 spi.xfer2([0xC, 0]) # Shutdown
+noop()
 spi.close()
