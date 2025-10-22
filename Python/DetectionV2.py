@@ -8,8 +8,12 @@ config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
 cam.start()
 
-# --- Background subtractor (detects motion / people) ---
+# --- Background subtractor ---
 fgbg = cv2.createBackgroundSubtractorMOG2(history=400, varThreshold=10, detectShadows=False)
+
+# Morphologische Kernel (Größe kann angepasst werden)
+kernel_erode = np.ones((5, 5), np.uint8)
+kernel_dilate = np.ones((15, 15), np.uint8)
 
 while True:
     frame = cam.capture_array()
@@ -20,14 +24,23 @@ while True:
     elif frame.shape[2] == 4:
         frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
 
-    # Convert to grayscale for analysis
+    # Convert to grayscale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Apply background subtraction → mask of moving objects (likely person)
+    # Background subtraction
     fgmask = fgbg.apply(gray)
-    fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
 
-    # Display the mask directly (white = detected person/motion)
+    # --- Morphologische Operationen ---
+    # Kleine weiße Flecken entfernen
+    fgmask = cv2.erode(fgmask, kernel_erode, iterations=1)
+
+    # Lücken in erkannten Personen schließen
+    fgmask = cv2.dilate(fgmask, kernel_dilate, iterations=2)
+
+    # Zusätzliche Glättung
+    fgmask = cv2.medianBlur(fgmask, 7)
+
+    # Anzeige
     cv2.imshow("Person Mask", fgmask)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
