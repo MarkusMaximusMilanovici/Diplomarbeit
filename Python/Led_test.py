@@ -3,7 +3,7 @@ import time
 
 # open SPI bus 0, device 0 (CS0)
 spi = spidev.SpiDev()
-spi.open(0, 0)
+spi.open(10, 0)
 spi.max_speed_hz = 1000000  # 1 MHz
 
 def send_cmd(register, data):
