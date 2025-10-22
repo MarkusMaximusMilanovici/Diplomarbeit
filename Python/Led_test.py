@@ -16,6 +16,10 @@ def init_max7219():
     send_cmd(0x0B, 0x07)  # scan limit = all 8 digits
     send_cmd(0x0C, 0x01)  # normal operation (not shutdown)
     send_cmd(0x0F, 0x00)  # display test off
+    send_cmd(0x0F, 0x01)  # turn on display test
+    time.sleep(2)
+    send_cmd(0x0F, 0x00)  # back to normal mode
+
     clear_display()
 
 def clear_display():
