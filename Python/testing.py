@@ -1,11 +1,6 @@
 import spidev, time
-import max7219.led as led
-
-device = led.matrix()
-device.show_message("Hello World")
 
 
-"""
 spi = spidev.SpiDev()
 spi.open(10, 0)
 spi.max_speed_hz = 1000000
@@ -21,4 +16,3 @@ spi.writebytes([0x0F, 0x00] * 4)  # Display test OFF
 spi.writebytes([0x0C, 0x00] * 4)  # Shutdown (optional)
 
 spi.close()
-"""
