@@ -11,4 +11,3 @@ device = max7219(serial, cascaded=4, block_orientation=90, rotate=0)
 
 with canvas(device) as draw:
     draw.rectangle(device.bounding_box, outline="white", fill="white")
-    draw.rectangle(device.bounding_box, outline="white", fill="white")
