@@ -5,7 +5,7 @@ import time
 
 serial = spi(port=0, device=0, gpio=noop())  # <-- use the classic one
 device = max7219(serial, cascaded=4)
-device.contrast(10)
+device.contrast(80)
 
 with canvas(device) as draw:
     draw.rectangle(device.bounding_box, fill="white")
