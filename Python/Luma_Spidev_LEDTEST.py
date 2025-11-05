@@ -4,8 +4,8 @@ from luma.core.render import canvas
 import time
 
 serial = spi(port=0, device=0, gpio=noop())  # <-- use the classic one
-device = max7219(serial, cascaded=4)
-device.contrast(10)
+device = max7219(serial, cascaded=3)
+device.contrast(255)
 
 with canvas(device) as draw:
     draw.rectangle(device.bounding_box, fill="white")
