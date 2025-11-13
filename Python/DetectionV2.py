@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from picamera2 import Picamera2
 
-# --- Initialize camera ---
 cam = Picamera2()
 config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
@@ -11,7 +10,7 @@ cam.start()
 fgbg = cv2.createBackgroundSubtractorKNN(history=70, dist2Threshold=400.0, detectShadows=False)
 
 kernel_erode = np.ones((2, 2), np.uint8)
-kernel_dilate = np.ones((7, 7), np.uint8)
+kernel_dilate = np.ones((13, 13), np.uint8)
 kernel_close = np.ones((12, 12), np.uint8)
 
 last_mask = None
@@ -36,25 +35,4 @@ while True:
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
 
     contours, _ = cv2.findContours(fgmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    mask_filled = np.zeros_like(fgmask)
-    active_person_found = False
-    for c in contours:
-        if cv2.contourArea(c) > 600:
-            cv2.drawContours(mask_filled, [c], -1, 255, -1)
-            active_person_found = True
-
-    mask_filled = cv2.medianBlur(mask_filled, 3)
-
-    # --- Nur anzeigen, wenn Person erkannt, sonst letztes Bild ---
-    if active_person_found:
-        last_mask = mask_filled.copy()
-    elif last_mask is not None:
-        mask_filled = last_mask.copy()
-
-    cv2.imshow("Person Mask", mask_filled)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cam.stop()
-cv2.destroyAllWindows()
+    mask_filled = np.zeros_like
