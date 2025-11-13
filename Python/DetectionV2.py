@@ -11,7 +11,7 @@ cam.start()
 fgbg = cv2.createBackgroundSubtractorKNN(history=70, dist2Threshold=400.0, detectShadows=False)
 
 kernel_erode = np.ones((2, 2), np.uint8)
-kernel_dilate = np.ones((13, 13), np.uint8)
+kernel_dilate = np.ones((7, 7), np.uint8)
 kernel_close = np.ones((12, 12), np.uint8)
 
 last_mask = None
