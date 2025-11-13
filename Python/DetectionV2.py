@@ -9,9 +9,12 @@ cam.start()
 
 fgbg = cv2.createBackgroundSubtractorKNN(history=70, dist2Threshold=400.0, detectShadows=False)
 
-kernel_erode = np.ones((2, 2), np.uint8)
-kernel_dilate = np.ones((13, 13), np.uint8)
-kernel_close = np.ones((12, 12), np.uint8)
+kernel_erode = np.ones((3, 3), np.uint8)
+kernel_dilate = np.ones((7, 7), np.uint8)
+kernel_close = np.ones((7, 7), np.uint8)
+
+min_area = 80
+active_area_sum = 120
 
 last_mask = None
 
@@ -33,6 +36,16 @@ while True:
     fgmask = cv2.erode(fgmask, kernel_erode, iterations=1)
 
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
+
+    contours, _ = cv2.findContours(fgmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    mask_filled = np.zeros_like(fgmask)
+    area_sum = 0
+    for c in contours:
+        if cv2.contourArea(c) > min_area:
+            cv2.drawContours(mask_filled, [c], -1, 255, -1)
+            area_sum += cv2.contourArea(c)
+    active_person_found = area_sum > active_area_sum
+    print(active_person_found, area_sum)
 
     contours, _ = cv2.findContours(fgmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     mask_filled = np.zeros_like(fgmask)
