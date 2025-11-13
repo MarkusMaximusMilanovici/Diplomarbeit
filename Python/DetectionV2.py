@@ -12,7 +12,7 @@ fgbg = cv2.createBackgroundSubtractorKNN(history=70, dist2Threshold=400.0, detec
 
 # Morphologie-Kernel angepasst
 kernel_erode = np.ones((3, 3), np.uint8)
-kernel_dilate = np.ones((11, 11), np.uint8)
+kernel_dilate = np.ones((13, 13), np.uint8)
 kernel_close = np.ones((12, 12), np.uint8)  # Größer für besseres Closing
 
 while True:
