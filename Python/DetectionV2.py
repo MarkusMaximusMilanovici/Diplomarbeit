@@ -51,6 +51,7 @@ while True:
     mask_filled = np.zeros_like(fgmask)
     min_area = 150        # Toleranz für kleine Konturen erhöht
     area_sum = 0
+
     for c in contours:
         if cv2.contourArea(c) > min_area:
             cv2.drawContours(mask_filled, [c], -1, 255, -1)
