@@ -8,7 +8,7 @@ cam.configure(config)
 cam.start()
 
 # History erhöht für weniger Geistereffekt
-fgbg = cv2.createBackgroundSubtractorKNN(history=100, dist2Threshold=400.0, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorKNN(history=50, dist2Threshold=350.0, detectShadows=False)
 
 # Größere Kernel für besseres Schließen von Lücken
 kernel_erode = np.ones((3, 3), np.uint8)
