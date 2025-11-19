@@ -32,7 +32,7 @@ else:
     use_picamera = False
 
 # Background subtractor
-fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=350.0, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorKNN(history=100, dist2Threshold=350.0, detectShadows=False)
 
 # Morphology kernels
 kernel_erode = np.ones((4, 4), np.uint8)
