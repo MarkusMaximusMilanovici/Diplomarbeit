@@ -19,5 +19,5 @@ while True:
         text(draw, (10, 1), lst[(index+1)%4], fill="white", font=proportional(LCD_FONT))
         text(draw, (18, 1), lst[(index+2)%4], fill="white", font=proportional(LCD_FONT))
         text(draw, (26, 1), lst[(index+3)%4], fill="white", font=proportional(LCD_FONT))
-    time.sleep(0.2)
+    time.sleep(0.5)
     index += 1
