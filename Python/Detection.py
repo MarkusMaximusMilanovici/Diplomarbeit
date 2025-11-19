@@ -24,7 +24,6 @@ else:
     use_picamera = False
 
 def get_gray(frame):
-    # If IR camera delivers single channel, use directly; else convert
     if len(frame.shape) == 2:
         return frame
     elif frame.shape[2] == 4:
@@ -33,29 +32,20 @@ def get_gray(frame):
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     return frame
 
-fgbg = cv2.createBackgroundSubtractorKNN(history=90, dist2Threshold=150.0, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorKNN(history=80, dist2Threshold=150.0, detectShadows=False)
 kernel_erode = np.ones((5, 5), np.uint8)
-kernel_dilate = np.ones((10, 10), np.uint8)
-kernel_close = np.ones((13, 13), np.uint8)
+kernel_dilate = np.ones((11, 11), np.uint8)  # Etwas größer, glättet besser
+kernel_close = np.ones((17, 17), np.uint8)
 kernel_open = np.ones((7, 7), np.uint8)
 
-master_mask = None
-max_area_sum = 0
-MIN_CONTOUR_AREA = 120
-HYSTERESIS_LOW = 90
-DISPLAY_SCALE = 1
-minimal_motion_frames = 0
-MINIMAL_MOTION_FRAMES_THRESHOLD = 10
-CALIBRATION_TIME = 2.5
+MIN_CONTOUR_AREA = 300
+CALIBRATION_TIME = 2.0
 start_time = time.time()
 is_calibrating = True
 
-print("[INFO] Calibration phase. Please clear the view for {CALIBRATION_TIME}s...")
+print("[INFO] Calibration phase, please step out of view for {:.1f}s...".format(CALIBRATION_TIME))
 
 while True:
-    time_now = time.time()
-    time_since_start = time_now - start_time
-
     if use_picamera:
         frame = cam.capture_array()
     else:
@@ -64,89 +54,50 @@ while True:
             break
 
     gray = get_gray(frame)
-    # Bilateral filter for noise, keep edges (best in IR)
-    gray = cv2.bilateralFilter(gray, 9, 50, 50)
-    # Contrast boost
+    gray = cv2.bilateralFilter(gray, 11, 70, 70)
     gray = cv2.equalizeHist(gray)
 
+    # -- Kalibrierung --
     if is_calibrating:
-        fgmask = fgbg.apply(gray, learningRate=0.15)
-        remaining = max(0, int(CALIBRATION_TIME - time_since_start + 1))
-        calib_screen = np.zeros((720, 1280), dtype=np.uint8)
-        text = f"Calibrating... {remaining}s"
-        cv2.putText(calib_screen, text, (400, 360),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 3)
-        cv2.imshow("Person Mask", calib_screen)
-        if time_since_start >= CALIBRATION_TIME:
+        fgmask = fgbg.apply(gray, learningRate=0.2)
+        time_left = max(0, int(CALIBRATION_TIME - (time.time() - start_time) + 1))
+        calib_screen = np.ones_like(gray)*255
+        text = f"Calibrating... {time_left}s"
+        cv2.putText(calib_screen, text, (400, 350), cv2.FONT_HERSHEY_SIMPLEX, 2, 0, 3)
+        cv2.imshow("TikTok Silhouette", calib_screen)
+        if (time.time() - start_time) >= CALIBRATION_TIME:
             is_calibrating = False
-            print("[INFO] Calibration complete. Ready for IR detection!")
+            print("[INFO] Calibration complete!")
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         continue
 
-    # Adaptive threshold to pick up weak features
+    # -- Bewegungsmaske + adaptive Schwelle --
+    motion_mask = fgbg.apply(gray, learningRate=0.003)
     adaptive = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                     cv2.THRESH_BINARY_INV, 31, 7)
-    # Combine with motion mask
-    motion_mask = cv2.bitwise_or(fgbg.apply(gray, learningRate=0.003), adaptive)
-    # Clean up with morphology
-    motion_mask = cv2.morphologyEx(motion_mask, cv2.MORPH_OPEN, kernel_open)
-    motion_mask = cv2.morphologyEx(motion_mask, cv2.MORPH_CLOSE, kernel_close)
-    motion_mask = cv2.dilate(motion_mask, kernel_dilate, iterations=2)
-    motion_mask = cv2.erode(motion_mask, kernel_erode, iterations=1)
-    _, motion_mask = cv2.threshold(motion_mask, 127, 255, cv2.THRESH_BINARY)
+                                     cv2.THRESH_BINARY_INV, 21, 10)
+    combined_mask = cv2.bitwise_or(motion_mask, adaptive)
 
-    # Edge detection (optional, as overlay)
-    edges = cv2.Canny(gray, 12, 42)
-    edge_overlay = cv2.bitwise_and(edges, motion_mask)
+    combined_mask = cv2.morphologyEx(combined_mask, cv2.MORPH_OPEN, kernel_open)
+    combined_mask = cv2.morphologyEx(combined_mask, cv2.MORPH_CLOSE, kernel_close)
+    combined_mask = cv2.dilate(combined_mask, kernel_dilate, iterations=2)
+    combined_mask = cv2.erode(combined_mask, kernel_erode, iterations=1)
+    _, combined_mask = cv2.threshold(combined_mask, 127, 255, cv2.THRESH_BINARY)
 
-    # Find contours only in full mask (not edges)
-    contours, _ = cv2.findContours(motion_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    mask_filled = np.zeros_like(motion_mask)
-    contour_list = []
-    area_sum = 0
-    for c in contours:
-        area = cv2.contourArea(c)
-        if area > MIN_CONTOUR_AREA:
-            contour_list.append(c)
-            area_sum += area
-    # Fill largest contour (person!)
-    if contour_list:
-        biggest = max(contour_list, key=cv2.contourArea)
-        cv2.drawContours(mask_filled, [biggest], -1, 255, cv2.FILLED)
-    # Add edge overlay for visual feedback
-    mask_filled = cv2.bitwise_or(mask_filled, edge_overlay)
+    # -- NUR größte Kontur: Person schwarz, Rest weiß --
+    contours, _ = cv2.findContours(combined_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    mask = np.ones_like(combined_mask) * 255  # Start: alles weiß
+    if contours:
+        biggest = max(contours, key=cv2.contourArea)
+        if cv2.contourArea(biggest) > MIN_CONTOUR_AREA:
+            cv2.drawContours(mask, [biggest], -1, 0, cv2.FILLED)  # Person wird SCHWARZ
 
-    # Motion freeze logic
-    if area_sum > HYSTERESIS_LOW:
-        minimal_motion_frames = 0
-        master_mask = mask_filled.copy()
-        status = "ACTIVE"
-    else:
-        minimal_motion_frames += 1
-        status = "IDLE"
-
-    if minimal_motion_frames >= MINIMAL_MOTION_FRAMES_THRESHOLD:
-        display_mask = master_mask if master_mask is not None else mask_filled
-        status = "FROZEN"
-    else:
-        display_mask = mask_filled
-
-    height, width = display_mask.shape
-    display_upscaled = cv2.resize(display_mask,
-        (int(width * DISPLAY_SCALE), int(height * DISPLAY_SCALE)), interpolation=cv2.INTER_CUBIC)
-    cv2.putText(display_upscaled, f"Status: {status}", (10, 25),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.65, (200, 200, 200), 2)
-    cv2.imshow("Person Mask IR", display_upscaled)
-
+    cv2.imshow("TikTok Silhouette", mask)
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         break
-    elif key == ord('r'):
-        master_mask = None
-        minimal_motion_frames = 0
-        print("[RESET] Master mask cleared")
 
+# Clean-up
 if use_picamera:
     cam.stop()
 else:
