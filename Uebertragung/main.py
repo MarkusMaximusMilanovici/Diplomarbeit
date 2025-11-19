@@ -7,7 +7,7 @@ from luma.core.legacy.font import proportional, LCD_FONT
 
 # 4 Module hintereinander
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=4, block_orientation=0)
+device = max7219(serial, cascaded=4, block_orientation=1)
 
 while True:
     with canvas(device) as draw:
