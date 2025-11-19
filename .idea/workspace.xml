@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Init">
-      <change beforePath="$PROJECT_DIR$/Python/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/Diplomarbeit.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Uebertragung/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +20,23 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MarkusMaximusMilanovici"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MarkusMaximusMilanovici&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/MarkusMaximusMilanovici/Diplomarbeit.git",
-    "accountId": "c9e15b52-1e20-4fee-871b-28daf44d39db"
+    "accountId": "c22c3d0b-31af-4fa2-b7c8-9cbcd368b6bd"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -50,7 +51,8 @@
   "keyToString": {
     "Python.Ascii_Spiegel.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "BildUebertragung",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/rober/Documents/Diplomarbeit/Python",
     "node.js.detected.package.eslint": "true",
@@ -84,6 +86,7 @@
       <updated>1758722323234</updated>
       <workItem from="1758722324316" duration="2585000" />
       <workItem from="1759931219469" duration="440000" />
+      <workItem from="1763563795731" duration="249000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -93,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759931526162</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Init">
+      <option name="closed" value="true" />
+      <created>1763563849112</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763563849112</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
