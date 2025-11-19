@@ -6,8 +6,8 @@ from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=4, block_orientation=0)
-device.contrast(60)
+device = max7219(serial, cascaded=4, block_orientation=-90)
+device.contrast(10)
 
 while True:
     with canvas(device) as draw:
