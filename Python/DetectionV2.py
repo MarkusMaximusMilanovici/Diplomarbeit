@@ -21,8 +21,8 @@ if system == "Linux":
     except ImportError:
         print("[WARNING] Picamera2 not found, using webcam...")
         cam = cv2.VideoCapture(0)
-        cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-        cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+        cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
         use_picamera = False
 else:
     print("[INFO] Initializing webcam...")
