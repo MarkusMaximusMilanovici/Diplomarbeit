@@ -2,17 +2,18 @@ import cv2
 import numpy as np
 from picamera2 import Picamera2
 
-# --- Initialize camera ---
 cam = Picamera2()
 config = cam.create_preview_configuration(main={"size": (1280, 720)})
 cam.configure(config)
 cam.start()
 
-fgbg = cv2.createBackgroundSubtractorKNN(history=70, dist2Threshold=400.0, detectShadows=False)
+# History erhöht für weniger Geistereffekt
+fgbg = cv2.createBackgroundSubtractorKNN(history=100, dist2Threshold=400.0, detectShadows=False)
 
+# Größere Kernel für besseres Schließen von Lücken
 kernel_erode = np.ones((3, 3), np.uint8)
-kernel_dilate = np.ones((7, 7), np.uint8)
-kernel_close = np.ones((7, 7), np.uint8)
+kernel_dilate = np.ones((9, 9), np.uint8)
+kernel_close = np.ones((18, 18), np.uint8)  # Größer!
 
 master_mask = None
 max_area_sum = 0
@@ -29,8 +30,11 @@ while True:
     gray = cv2.equalizeHist(gray)
 
     fgmask = fgbg.apply(gray)
+
+    # Starkes Closing zuerst
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_CLOSE, kernel_close)
-    fgmask = cv2.dilate(fgmask, kernel_dilate, iterations=2)
+    # Mehr Dilation für Lückenschluss
+    fgmask = cv2.dilate(fgmask, kernel_dilate, iterations=3)
     fgmask = cv2.erode(fgmask, kernel_erode, iterations=1)
 
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
@@ -41,17 +45,17 @@ while True:
     area_sum = 0
     for c in contours:
         if cv2.contourArea(c) > min_area:
-            cv2.drawContours(mask_filled, [c], -1, 255, -1)
+            # cv2.FILLED statt -1 für garantierte Füllung
+            cv2.drawContours(mask_filled, [c], -1, 255, cv2.FILLED)
             area_sum += cv2.contourArea(c)
 
     mask_filled = cv2.medianBlur(mask_filled, 3)
 
-    # --- Beste Silhouette nur dann speichern, wenn sie maximal groß ist ---
+    # Beste Silhouette speichern
     if area_sum > max_area_sum and area_sum > 400:
         max_area_sum = area_sum
         master_mask = mask_filled.copy()
 
-    # --- Anzeige: aktuelle Maske, sonst die "beste" ---
     if area_sum > 120:
         display_mask = mask_filled
     elif master_mask is not None:
