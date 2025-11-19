@@ -9,8 +9,13 @@ from luma.core.legacy.font import proportional, LCD_FONT
 serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=4, block_orientation=-90)
 
+device.contrast(120)
+
 while True:
     with canvas(device) as draw:
-        # "MANU" auf die LED-Matrix schreiben, Startpunkt (0, 0)
-        text(draw, (0, 0), "MANU", fill="white", font=proportional(LCD_FONT))
-    time.sleep(0.2)  # Kurze Pause, Display bleibt trotzdem angezeigt
+        # Jeder Buchstabe auf die entsprechende Matrix (8 Pixel Schritte)
+        text(draw, (0, 0), "M", fill="white", font=proportional(LCD_FONT))
+        text(draw, (8, 0), "A", fill="white", font=proportional(LCD_FONT))
+        text(draw, (16, 0), "N", fill="white", font=proportional(LCD_FONT))
+        text(draw, (24, 0), "U", fill="white", font=proportional(LCD_FONT))
+    time.sleep(0.2)
