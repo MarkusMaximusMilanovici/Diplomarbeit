@@ -9,7 +9,7 @@ serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=4, block_orientation=-90)
 device.contrast(10)
 
-lst = "Niggi..."
+lst = "MANU   ROB    "
 index = 0
 
 while True:
@@ -19,5 +19,5 @@ while True:
         text(draw, (10, 1), lst[(index+1)%len(lst)], fill="white", font=proportional(LCD_FONT))
         text(draw, (18, 1), lst[(index+2)%len(lst)], fill="white", font=proportional(LCD_FONT))
         text(draw, (26, 1), lst[(index+3)%len(lst)], fill="white", font=proportional(LCD_FONT))
-    # time.sleep(0.5)
+    time.sleep(0.25)
     index += 1
