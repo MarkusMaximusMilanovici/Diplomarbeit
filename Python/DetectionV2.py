@@ -11,7 +11,7 @@ fgbg = cv2.createBackgroundSubtractorKNN(history=100, dist2Threshold=400.0, dete
 
 kernel_erode = np.ones((3, 3), np.uint8)
 kernel_dilate = np.ones((9, 9), np.uint8)
-kernel_close = np.ones((18, 18), np.uint8)
+kernel_close = np.ones((7, 7), np.uint8)
 
 # Grid-Einstellungen: Teile das Bild in 3x3 Bereiche
 GRID_ROWS = 3
