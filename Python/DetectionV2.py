@@ -14,7 +14,7 @@ if system == "Linux":
         print("[INFO] Initializing Picamera2...")
         cam = Picamera2()
         # GEÄNDERT: 1920x1080 Auflösung
-        config = cam.create_preview_configuration(main={"size": (1920, 1080)})
+        config = cam.create_preview_configuration(main={"size": (1280, 720)})
         cam.configure(config)
         cam.start()
         use_picamera = True
@@ -32,7 +32,7 @@ else:
     use_picamera = False
 
 # Background subtractor
-fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=500.0, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=350.0, detectShadows=False)
 
 # Morphology kernels
 kernel_erode = np.ones((4, 4), np.uint8)
