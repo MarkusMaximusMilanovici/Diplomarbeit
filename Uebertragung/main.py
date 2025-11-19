@@ -9,7 +9,7 @@ serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=4, block_orientation=-90)
 device.contrast(10)
 
-lst = "Niggi"
+lst = "Niggi..."
 index = 0
 
 while True:
