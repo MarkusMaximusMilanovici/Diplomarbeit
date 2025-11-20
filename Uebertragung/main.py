@@ -6,26 +6,27 @@ from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=16, block_orientation=-90)  # 16 Module in Serie
+device = max7219(serial, cascaded=16, block_orientation=-90)  # 16 Blöcke seriell
 
 device.contrast(10)
 lst = "Das Crazy euda wir fahrn zu WM "
 index = 0
 
-# Funktion: Buchstaben vertikal zeichnen (wie vertical_text)
-def draw_vertical(draw, x, y, char, fill, font):
-    for i, c in enumerate(char):
-        text(draw, (x, y + i * 8), c, fill=fill, font=proportional(LCD_FONT))
-
 while True:
     with canvas(device) as draw:
         for block in range(16):
-            x = 2 + 8 * block   # x-Position für jeden Block mittig
+            block_group = block // 4      # 0,1,2,3 für jedes 4er-Modul
+            pos_in_group = block % 4      # 0...3 innerhalb des Moduls
+
+            if block_group % 2 == 0:
+                # GERADE Zeile (z.B. ganz oben, dritte Modul-Reihe von oben): Links --> Rechts
+                x = 2 + 8 * block
+            else:
+                # UNGERADE Zeile: Rechts --> Links (invertierte x-Position innerhalb des 4er-Moduls)
+                block_start = 8 * (block_group * 4)
+                x = block_start + (8 * (3 - pos_in_group)) + 2
+
             char = lst[(index + block) % len(lst)]
-            # Alle 4 Blöcke umschalten: 0–3, 8–11 horizontal; 4–7, 12–15 vertikal
-            if (block // 4) % 2 == 0:  # Gruppenweise (erste + dritte 4er-Blöcke)
-                text(draw, (x, 1), char, fill="white", font=proportional(LCD_FONT))
-            else:                      # zweite + vierte 4er-Blöcke vertikal
-                draw_vertical(draw, x, 0, char, "white", proportional(LCD_FONT))
+            text(draw, (x, 1), char, fill="white", font=proportional(LCD_FONT))
     time.sleep(0.5)
     index += 1
