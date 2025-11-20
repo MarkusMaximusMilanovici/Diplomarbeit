@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="bild">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker">
+      <change beforePath="$PROJECT_DIR$/Uebertragung/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uebertragung/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763624012616</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1763625627932</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1763625627932</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,7 +320,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init" />
     <MESSAGE value="bild" />
-    <option name="LAST_COMMIT_MESSAGE" value="bild" />
+    <MESSAGE value="tweaker" />
+    <option name="LAST_COMMIT_MESSAGE" value="tweaker" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
