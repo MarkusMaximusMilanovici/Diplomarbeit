@@ -2,7 +2,6 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-# Tipp: Gamma-Korrektur (hilft bei NoIR/farbverfremdeten Modulen)
 gamma = 1.3
 look_up_table = np.array([
     ((i / 255.0) ** (1.0 / gamma)) * 255 for i in range(256)
@@ -12,36 +11,49 @@ cap = cv2.VideoCapture(0)
 mp_selfie = mp.solutions.selfie_segmentation
 segmenter = mp_selfie.SelfieSegmentation(model_selection=1)
 
+bg_frames = []
+for i in range(30):
+    ret, bg = cap.read()
+    if not ret:
+        break
+    bg = cv2.LUT(bg, look_up_table)
+    bg_gray = cv2.cvtColor(bg, cv2.COLOR_BGR2GRAY)
+    bg_frames.append(bg_gray)
+background = np.median(bg_frames, axis=0).astype(np.uint8)
+
 while True:
     ret, frame = cap.read()
     if not ret:
         break
 
-    # ---- 1. Gamma-Korrektur anwenden ----
     frame_gamma = cv2.LUT(frame, look_up_table)
+    frame_mirror = cv2.flip(frame_gamma, 1)
 
-    # ---- 2. Spiegelung (wie Selfie) & RGB-Konvertierung ----
-    frame_rgb = cv2.cvtColor(cv2.flip(frame_gamma, 1), cv2.COLOR_BGR2RGB)
-
-    # ---- 3. KI-Personenerkennung (MediaPipe) ----
+    frame_rgb = cv2.cvtColor(frame_mirror, cv2.COLOR_BGR2RGB)
     results = segmenter.process(frame_rgb)
-    mask = results.segmentation_mask  # Wertebereich [0,1], 1 = sicher Person
+    mask = results.segmentation_mask
+    mp_mask = (mask > 0.35).astype(np.uint8) * 255
 
-    # ---- 4. Schwellenwert für feine Kontur (Finger!): Nicht Standard (0.5), sondern etwas niedriger ----
-    # Bei zu niedrigem Wert (z.B. <0.2) können "Ghost"-Effekte entstehen!
-    person_mask = (mask > 0.35).astype(np.uint8) * 255
+    mp_mask = cv2.morphologyEx(mp_mask, cv2.MORPH_CLOSE, np.ones((3,3),np.uint8))
+    mp_mask = cv2.morphologyEx(mp_mask, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
 
-    # ---- 5. Morphologie mit kleinen Kernels – NUR minimal, damit Finger erhalten bleiben ----
-    # Zu große Kernel verschmieren! (max (3,3) – optional auch verzichten!)
-    person_mask = cv2.morphologyEx(person_mask, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
-    person_mask = cv2.morphologyEx(person_mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    gray = cv2.cvtColor(frame_mirror, cv2.COLOR_BGR2GRAY)
+    diff = cv2.absdiff(gray, background)
+    _, classic_mask = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)
+    classic_mask = cv2.morphologyEx(classic_mask, cv2.MORPH_OPEN, np.ones((5,5),np.uint8))
+    classic_mask = cv2.morphologyEx(classic_mask, cv2.MORPH_CLOSE, np.ones((5,5),np.uint8))
 
-    # ---- 6. Blur nur sanft, hilft gegen Rauschen OHNE Finger zu verwischen ----
-    # Optional, kann ganz weggelassen werden!
-    # person_mask = cv2.GaussianBlur(person_mask, (3,3), 0)
+    combo_mask = mp_mask.copy()
+    combo_mask[(classic_mask == 255) & (mp_mask == 0)] = 128  # Halbwert (Grau): klassische Fingerergänzung
 
-    # ---- 7. Immer nur aktuellen Frame anzeigen, KEINE Überlagerung! ----
-    cv2.imshow("Optimierte Silhouette: Präzise Finger, Kein Ghosting", person_mask)
+    vis = np.zeros_like(mp_mask)
+    vis[combo_mask == 255] = 255    # Person
+    vis[combo_mask == 128] = 130    # Finger/Bewegungsdetails (mittleres Grau)
+
+    # --------- Binarisierung ("clampen"): Nur helle Werte bleiben, Rest wird schwarz ---------
+    _, vis_binary = cv2.threshold(vis, 200, 255, cv2.THRESH_BINARY)
+
+    cv2.imshow("MediaPipe + Classic - Binär Silhouette", vis_binary)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

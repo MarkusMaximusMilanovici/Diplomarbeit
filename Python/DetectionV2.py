@@ -24,9 +24,9 @@ else:
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     use_picamera = False
 
-fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=200.0, detectShadows=False)
-kernel_erode = np.ones((4, 4), np.uint8)
-kernel_dilate = np.ones((8, 8), np.uint8)
+fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=350.0, detectShadows=False)
+kernel_erode = np.ones((3, 3), np.uint8)
+kernel_dilate = np.ones((9, 9), np.uint8)
 kernel_close = np.ones((15, 15), np.uint8)
 kernel_open = np.ones((5, 5), np.uint8)
 
