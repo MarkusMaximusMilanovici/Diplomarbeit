@@ -7,6 +7,7 @@ system = platform.system()
 if system == "Linux":
     try:
         from picamera2 import Picamera2
+
         cam = Picamera2()
         config = cam.create_preview_configuration(main={"size": (1280, 720)})
         cam.configure(config)
@@ -23,7 +24,7 @@ else:
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     use_picamera = False
 
-fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=300.0, detectShadows=False)
+fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=200.0, detectShadows=False)
 kernel_erode = np.ones((4, 4), np.uint8)
 kernel_dilate = np.ones((8, 8), np.uint8)
 kernel_close = np.ones((15, 15), np.uint8)
@@ -43,6 +44,9 @@ MINIMAL_MOTION_FRAMES_THRESHOLD = 10
 CALIBRATION_TIME = 3.0
 start_time = time.time()
 is_calibrating = True
+
+# ---- CLAHE-Initialisierung ----
+clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(12, 12))
 
 print("[INFO] Starting... Please step out of camera view for calibration.")
 
@@ -64,7 +68,9 @@ while True:
         frame = cv2.cvtColor(frame, cv2.COLOR_RGBA2BGR)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (5, 5), 0)
-    gray = cv2.equalizeHist(gray)
+
+    # ---- Hier CLAHE statt equalizeHist ----
+    gray = clahe.apply(gray)
 
     # Kalibrierungsphase
     if is_calibrating:
@@ -87,7 +93,6 @@ while True:
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_CLOSE, kernel_close)
     fgmask = cv2.dilate(fgmask, kernel_dilate, iterations=2)
     fgmask = cv2.erode(fgmask, kernel_erode, iterations=1)
-    # KEIN weiteres Blur/MedianBlur nach Flächenfüllung, um Motion Blur zu minimieren!
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
 
     contours, _ = cv2.findContours(fgmask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -102,7 +107,6 @@ while True:
     # Motion Detection-Logik
     if area_sum > HYSTERESIS_LOW:
         minimal_motion_frames = 0
-        # Sobald Bewegung, immer letzte Maske überschreiben
         master_mask = mask_filled.copy()
         max_area_sum = area_sum
         status = "ACTIVE"
@@ -110,7 +114,7 @@ while True:
         minimal_motion_frames += 1
         status = "IDLE"
 
-    # Frozen-Logik: Erst nach mehreren ruhigen Frames wird eingefroren und letzte Maske angezeigt
+    # Frozen-Logik
     if minimal_motion_frames >= MINIMAL_MOTION_FRAMES_THRESHOLD:
         display_mask = master_mask if master_mask is not None else mask_filled
         status = "FROZEN"
@@ -118,7 +122,8 @@ while True:
         display_mask = mask_filled
 
     height, width = display_mask.shape
-    display_upscaled = cv2.resize(display_mask, (int(width*DISPLAY_SCALE), int(height*DISPLAY_SCALE)), interpolation=cv2.INTER_CUBIC)
+    display_upscaled = cv2.resize(display_mask, (int(width * DISPLAY_SCALE), int(height * DISPLAY_SCALE)),
+                                  interpolation=cv2.INTER_CUBIC)
 
     cv2.putText(display_upscaled, f"Status: {status}", (10, 25),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (200, 200, 200), 2)
