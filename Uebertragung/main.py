@@ -6,28 +6,26 @@ from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=8, block_orientation=-90)  # Alle 8 Module als Serie
+device = max7219(serial, cascaded=16, block_orientation=-90)  # 16 Module in Serie
 
 device.contrast(10)
 lst = "Das Crazy euda wir fahrn zu WM "
 index = 0
 
-# Funktion, um Buchstaben vertikal darzustellen (simuliert vertical_text)
+# Funktion: Buchstaben vertikal zeichnen (wie vertical_text)
 def draw_vertical(draw, x, y, char, fill, font):
     for i, c in enumerate(char):
         text(draw, (x, y + i * 8), c, fill=fill, font=proportional(LCD_FONT))
 
 while True:
     with canvas(device) as draw:
-        # Modul 0-3: Normal horizontal
-        text(draw, (2, 1), lst[(index + 0) % len(lst)], fill="white", font=proportional(LCD_FONT))
-        text(draw, (10, 1), lst[(index + 1) % len(lst)], fill="white", font=proportional(LCD_FONT))
-        text(draw, (18, 1), lst[(index + 2) % len(lst)], fill="white", font=proportional(LCD_FONT))
-        text(draw, (26, 1), lst[(index + 3) % len(lst)], fill="white", font=proportional(LCD_FONT))
-        # Modul 4-7: Vertikal simuliert
-        draw_vertical(draw, 34, 0, lst[(index + 4) % len(lst)], "white", proportional(LCD_FONT))
-        draw_vertical(draw, 42, 0, lst[(index + 5) % len(lst)], "white", proportional(LCD_FONT))
-        draw_vertical(draw, 50, 0, lst[(index + 6) % len(lst)], "white", proportional(LCD_FONT))
-        draw_vertical(draw, 58, 0, lst[(index + 7) % len(lst)], "white", proportional(LCD_FONT))
+        for block in range(16):
+            x = 2 + 8 * block   # x-Position für jeden Block mittig
+            char = lst[(index + block) % len(lst)]
+            # Alle 4 Blöcke umschalten: 0–3, 8–11 horizontal; 4–7, 12–15 vertikal
+            if (block // 4) % 2 == 0:  # Gruppenweise (erste + dritte 4er-Blöcke)
+                text(draw, (x, 1), char, fill="white", font=proportional(LCD_FONT))
+            else:                      # zweite + vierte 4er-Blöcke vertikal
+                draw_vertical(draw, x, 0, char, "white", proportional(LCD_FONT))
     time.sleep(0.5)
     index += 1
