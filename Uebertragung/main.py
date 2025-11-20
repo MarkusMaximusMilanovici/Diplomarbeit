@@ -13,13 +13,12 @@ device.contrast(10)
 lst = "Das Crazy euda wir fahrn zu WM "
 index = 0
 
-# PIL-Standardfont (oder wähle einen passenden TrueType-Font)
 pil_font = ImageFont.load_default()
 
 def draw_rotated_char(draw, x, y, char, font, fill):
     im = Image.new("1", (8, 8))
     idraw = ImageDraw.Draw(im)
-    idraw.text((2, 1), char, font=font, fill=fill)
+    idraw.text((2, -1), char, font=font, fill=fill)  # Y hier auf -1, ggf. weiter anpassen
     im = im.rotate(180)
     draw.bitmap((x, y), im, fill=fill)
 
