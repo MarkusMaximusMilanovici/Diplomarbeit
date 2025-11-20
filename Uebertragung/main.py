@@ -10,7 +10,7 @@ serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=16, block_orientation=-90)
 device.contrast(10)
 
-lst = "Das    Crazy    euda    wir    fahrn    zur    WM    "
+lst = "Das        Crazy        euda        wir        fahrn        zur        WM    "
 index = 0
 
 pil_font = ImageFont.load_default()
@@ -35,5 +35,5 @@ while True:
                 block_start = 8 * (grp * 4)
                 x = block_start + (8 * (3 - pos_in_grp)) + 2
                 draw_rotated_char(draw, x, 0, char, pil_font, "white")
-    time.sleep(0.1)
+    time.sleep(0.5)
     index += 1
