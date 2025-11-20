@@ -8,11 +8,11 @@ from luma.core.legacy.font import proportional, LCD_FONT
 serial = spi(port=0, device=0, gpio=noop())
 
 # Erstes 4er-Cluster, block_orientation -90
-device1 = max7219(serial, cascaded=4, block_orientation=-90)
+device1 = max7219(serial, cascaded=4, block_orientation=90)
 device1.contrast(10)
 
 # Zweites 4er-Cluster, block_orientation 90
-device2 = max7219(serial, cascaded=4, block_orientation=90)
+device2 = max7219(serial, cascaded=4, block_orientation=-90)
 device2.contrast(10)
 
 lst = "Das Crazy euda wir fahrn zu WM "
