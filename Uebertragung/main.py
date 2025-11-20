@@ -1,38 +1,29 @@
 import time
-from PIL import Image, ImageDraw
 from luma.led_matrix.device import max7219
 from luma.core.interface.serial import spi, noop
 from luma.core.render import canvas
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 
-# SPI-Init und Matritzen-Setup
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=16, block_orientation=-90)
+device = max7219(serial, cascaded=8, block_orientation=-90)  # Zwei 4er-Module = 8 Module
 device.contrast(10)
 
-# Animierter Text
 lst = "Das Crazy euda wir fahrn zu WM "
 index = 0
 
-def draw_rotated_char(draw, x, y, char, font, fill):
-    # Ein 8x8 Bild nur für den Buchstaben zeichnen
-    img = Image.new("1", (8, 8))
-    idraw = ImageDraw.Draw(img)
-    idraw.text((2, 1), char, font=font, fill=fill)
-    img = img.rotate(180)
-    draw.bitmap((x, y), img, fill=fill)
-
 while True:
     with canvas(device) as draw:
-        for block in range(16):
-            grp = block // 4
-            pos_in_grp = block % 4
-            char = lst[(index + block) % len(lst)]
-            x = 2 + 8 * block if grp % 2 == 0 else (8 * (grp * 4) + 8 * (3 - pos_in_grp) + 2)
-            if grp % 2 == 0:
-                text(draw, (x, 1), char, fill="white", font=proportional(LCD_FONT))
-            else:
-                draw_rotated_char(draw, x, 0, char, proportional(LCD_FONT), "white")
-    time.sleep(0.5)
+        # Erstes 4er-Modul: Buchstaben auf Modul 0-3 platzieren
+        text(draw, (2, 1), lst[(index + 0) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (10, 1), lst[(index + 1) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (18, 1), lst[(index + 2) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (26, 1), lst[(index + 3) % len(lst)], fill="white", font=proportional(LCD_FONT))
+
+        # Zweites 4er-Modul: Buchstaben auf Modul 4-7 platzieren
+        text(draw, (34, 1), lst[(index + 4) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (42, 1), lst[(index + 5) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (50, 1), lst[(index + 6) % len(lst)], fill="white", font=proportional(LCD_FONT))
+        text(draw, (58, 1), lst[(index + 7) % len(lst)], fill="white", font=proportional(LCD_FONT))
+    time.sleep(0.1)
     index += 1
