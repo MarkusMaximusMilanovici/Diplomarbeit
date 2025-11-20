@@ -6,10 +6,10 @@ from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=4, block_orientation=-90)
+device = max7219(serial, cascaded=8, block_orientation=-90)
 device.contrast(10)
 
-lst = "Das Crazy euda wir fahrn zu WM"
+lst = "Das Crazy euda wir fahrn zu WM "
 index = 0
 
 while True:
