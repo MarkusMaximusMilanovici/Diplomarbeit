@@ -66,7 +66,7 @@ Me who she be, I'm kinda fuckin' with it, show me some mo'
 Bitch, we tatted head to toe, could give a fuck, the story wrote
 You wanna tweak it up with me, then I'ma show you how that go
 Like the money in my pockets, blow
-They havin' convos about me, these pussy niggas don't know over
+
 """
 index = 0
 
