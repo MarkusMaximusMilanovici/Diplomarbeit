@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker" />
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="bild">
+      <change beforePath="$PROJECT_DIR$/Uebertragung/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uebertragung/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +117,7 @@
       <updated>1758722323234</updated>
       <workItem from="1758722324316" duration="2585000" />
       <workItem from="1759931219469" duration="440000" />
-      <workItem from="1763563795731" duration="5012000" />
+      <workItem from="1763563795731" duration="4117000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -301,31 +303,7 @@
       <option name="project" value="LOCAL" />
       <updated>1763624012616</updated>
     </task>
-    <task id="LOCAL-00024" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763624214296</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1763624214296</updated>
-    </task>
-    <task id="LOCAL-00025" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763624258292</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1763624258294</updated>
-    </task>
-    <task id="LOCAL-00026" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763624871710</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1763624871710</updated>
-    </task>
-    <option name="localTasksCounter" value="27" />
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,8 +312,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init" />
     <MESSAGE value="bild" />
-    <MESSAGE value="tweaker" />
-    <option name="LAST_COMMIT_MESSAGE" value="tweaker" />
+    <option name="LAST_COMMIT_MESSAGE" value="bild" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

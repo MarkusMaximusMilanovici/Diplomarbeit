@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+print("LECK")
+=======
 import time
 from luma.led_matrix.device import max7219
 from luma.core.interface.serial import spi, noop
@@ -79,3 +82,4 @@ while True:
         text(draw, (26, 1), lst[(index+3)%len(lst)], fill="white", font=proportional(LCD_FONT))
     time.sleep(0.1)
     index += 1
+>>>>>>> 2e912ca7403646e318e979920410a26340ea53b4
