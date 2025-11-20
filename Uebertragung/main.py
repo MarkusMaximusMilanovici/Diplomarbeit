@@ -35,5 +35,5 @@ while True:
                 block_start = 8 * (grp * 4)
                 x = block_start + (8 * (3 - pos_in_grp)) + 2
                 draw_rotated_char(draw, x, 0, char, pil_font, "white")
-    time.sleep(0.5)
+    time.sleep(0.25)
     index += 1
