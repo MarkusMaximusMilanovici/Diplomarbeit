@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, block_orientation=90, width = 32, height = 32)
+device = max7219(serial, block_orientation=-90, width = 32, height = 32)
 device.contrast(10)
 
 print(device.width)
