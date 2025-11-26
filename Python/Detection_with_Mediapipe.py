@@ -24,7 +24,7 @@ for i in range(calibration_frames):
     if cv2.waitKey(10) & 0xFF == 27:
         break
 
-print("Kalibrierung abgeschlossen. Du kannst jetzt ins Bild.")
+print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== Hauptloop ======
 while True:
@@ -36,28 +36,29 @@ while True:
     blurred = cv2.GaussianBlur(gray, (11, 11), 0)
     median = cv2.medianBlur(blurred, 9)
 
-    edges = cv2.Canny(median, 70, 150)
     # MediaPipe Person Segmentierung
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.5).astype(np.uint8) * 255
 
-    # Bewegungsmaske (fgmask) vor Canny: Erode und Dilate als Preprocessing
+    # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
-
-    # Morphologische Reinigung VOR Canny
     kernel = np.ones((5, 5), np.uint8)
+
+    # Vorverarbeitung: Erode und Dilate
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
     fgmask = cv2.dilate(fgmask, kernel, iterations=1)
 
-    # Jetzt die Kantenerkennung auf dem gereinigten fgmask
+    # Canny-Kantenerkennung auf dem vorverarbeiteten fgmask
     edges = cv2.Canny(fgmask, 60, 130)
 
-    # Morphologische Reinigung NACH Canny
-    edges_clean = cv2.erode(edges, kernel, iterations=1)
-    edges_clean = cv2.dilate(edges_clean, kernel, iterations=1)
+    # --- Opening (Erosion gefolgt von Dilation) auf Kantenbild ---
+    edges_open = cv2.morphologyEx(edges, cv2.MORPH_OPEN, kernel)
+
+    # --- Closing (Dilation gefolgt von Erosion) auf Kantenbild ---
+    edges_clean = cv2.morphologyEx(edges_open, cv2.MORPH_CLOSE, kernel)
 
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
