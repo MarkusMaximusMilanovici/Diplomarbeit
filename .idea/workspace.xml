@@ -168,23 +168,7 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1763563795731" duration="4117000" />
       <workItem from="1764161434767" duration="428000" />
-      <workItem from="1764161950989" duration="2666000" />
-    </task>
-    <task id="LOCAL-00002" summary="Init">
-      <option name="closed" value="true" />
-      <created>1763563849112</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1763563849112</updated>
-    </task>
-    <task id="LOCAL-00003" summary="bild">
-      <option name="closed" value="true" />
-      <created>1763565153448</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1763565153448</updated>
+      <workItem from="1764161950989" duration="3370000" />
     </task>
     <task id="LOCAL-00004" summary="bild">
       <option name="closed" value="true" />
@@ -562,7 +546,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764164580635</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764164670534</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1764164670534</updated>
+    </task>
+    <task id="LOCAL-00052" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764164742760</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1764164742760</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +576,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$video_downscale.coverage" NAME="video_downscale Coverage Results" MODIFIED="1764162660196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Uebertragung" />
-    <SUITE FILE_PATH="coverage/Diplomarbeit$Video_Matrix.coverage" NAME="Video_Matrix Coverage Results" MODIFIED="1764164425500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Uebertragung" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Video_Matrix.coverage" NAME="Video_Matrix Coverage Results" MODIFIED="1764164537801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Uebertragung" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$main.coverage" NAME="main Coverage Results" MODIFIED="1763564999029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Uebertragung" />
   </component>
