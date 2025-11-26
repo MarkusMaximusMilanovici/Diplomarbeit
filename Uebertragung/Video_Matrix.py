@@ -37,6 +37,8 @@ while True:
     # BGR -> GRAY
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
+    gray = np.rot90(gray, 1)
+
     # PIL-Image aus Graustufen machen
     img = Image.fromarray(gray)
 
@@ -47,7 +49,7 @@ while True:
     img = img.convert(device.mode)
 
     device.display(img)
-    time.sleep(0.1)
+    time.sleep(0.5)
 
 cap.release()
 cv2.destroyAllWindows()
