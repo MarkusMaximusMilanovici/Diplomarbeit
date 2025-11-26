@@ -3,7 +3,7 @@ from PIL import Image
 import numpy as np
 
 # Input and output paths
-input_path = 'bad-apple.mp4'
+input_path = 'nightmare---doom-1-gameplay.mp4'
 output_path = 'output_32x32.mp4'
 
 # Open the video

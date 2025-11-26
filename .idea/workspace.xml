@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker" />
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker">
+      <change beforePath="$PROJECT_DIR$/Uebertragung/doom.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +72,7 @@
       <recent name="C:\Users\rober\Documents\Diplomarbeit\Python" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Video_Matrix">
+  <component name="RunManager" selected="Python.video_downscale">
     <configuration name="Video_Matrix" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Diplomarbeit" />
       <option name="ENV_FILES" value="" />
@@ -142,8 +144,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Video_Matrix" />
         <item itemvalue="Python.video_downscale" />
+        <item itemvalue="Python.Video_Matrix" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -168,15 +170,7 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1763563795731" duration="4117000" />
       <workItem from="1764161434767" duration="428000" />
-      <workItem from="1764161950989" duration="6139000" />
-    </task>
-    <task id="LOCAL-00029" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763630185689</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1763630185689</updated>
+      <workItem from="1764161950989" duration="6450000" />
     </task>
     <task id="LOCAL-00030" summary="tweaker">
       <option name="closed" value="true" />
@@ -562,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764168600575</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764168730960</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1764168730960</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
