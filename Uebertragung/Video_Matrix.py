@@ -47,7 +47,7 @@ while True:
     img = img.convert(device.mode)
 
     device.display(img)
-    #time.sleep(1/30)
+    time.sleep(1/15)
 
 cap.release()
 cv2.destroyAllWindows()
