@@ -40,7 +40,7 @@ while True:
     # BGR -> GRAY
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    gray = np.rot90(gray, 1)
+    #gray = np.rot90(gray, 1)
 
     # PIL-Image aus Graustufen machen
     img = Image.fromarray(gray)
