@@ -47,10 +47,12 @@ while True:
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
     edges = cv2.Canny(fgmask, 60, 130)
 
-    # === Opening: Erosion & Dilation für saubere Kanten ===
+    # === Zwei Opening-Schritte: (Erosion + Dilation) zweimal nacheinander ===
     kernel = np.ones((5, 5), np.uint8)
-    edges_eroded = cv2.erode(edges, kernel, iterations=1)
-    edges_clean = cv2.dilate(edges_eroded, kernel, iterations=1)
+    edges_clean = edges.copy()
+    for _ in range(2):
+        edges_clean = cv2.erode(edges_clean, kernel, iterations=1)
+        edges_clean = cv2.dilate(edges_clean, kernel, iterations=1)
 
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
