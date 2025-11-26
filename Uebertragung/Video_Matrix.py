@@ -34,13 +34,18 @@ while True:
     # Debug: im Fenster anzeigen
     cv2.imshow("frame", frame)
 
-    # BGR -> RGB
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    # BGR -> GRAY
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Auf Gerätegröße bringen (Breite/Höhe vom Device)
-    img = Image.fromarray(frame_rgb).resize((device.width, device.height))
+    # PIL-Image aus Graustufen machen
+    img = Image.fromarray(gray)
 
-    # An Matrix schicken
+    # Auf Gerätegröße bringen
+    img = img.resize((device.width, device.height))
+
+    # Bildmodus an Device anpassen (oft "1" oder "L")
+    img = img.convert(device.mode)
+
     device.display(img)
 
 cap.release()
