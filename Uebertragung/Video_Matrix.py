@@ -39,6 +39,6 @@ while True:
     frame[8:16, :] = zweiteReiheRot
     frame[24:32, :] = vierteReiheRot
     cv2.imshow('frame', frame)
-    device.display(frame)
+    device.display(Image.fromarray(frame))
 cap.release()
 cv2.destroyAllWindows()
