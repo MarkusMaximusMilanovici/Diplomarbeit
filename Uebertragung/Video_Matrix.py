@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=16, block_orientation=-90)
+device = max7219(serial, cascaded=16, block_orientation=0)
 device.contrast(10)
 
 video_path = "output_32x32.mp4"
@@ -47,6 +47,7 @@ while True:
     img = img.convert(device.mode)
 
     device.display(img)
+    time.sleep(0.1)
 
 cap.release()
 cv2.destroyAllWindows()
