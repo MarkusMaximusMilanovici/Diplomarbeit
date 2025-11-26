@@ -18,7 +18,8 @@ for i in range(calibration_frames):
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     fgbg.apply(gray, learningRate=0.5)
-    cv2.putText(frame, f'Kalibrierung: {i+1}/{calibration_frames}', (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                (0, 255, 0), 2)
     cv2.imshow('Kalibrierung', frame)
     if cv2.waitKey(10) & 0xFF == 27:
         break
@@ -41,25 +42,29 @@ while True:
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.5).astype(np.uint8) * 255
 
-    # Bewegungsmaske + Kanten-Extraktion
+    # Bewegungsmaske (fgmask) vor Canny: Erode und Dilate als Preprocessing
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
+
+    # Morphologische Reinigung VOR Canny
+    kernel = np.ones((5, 5), np.uint8)
+    fgmask = cv2.erode(fgmask, kernel, iterations=1)
+    fgmask = cv2.dilate(fgmask, kernel, iterations=1)
+
+    # Jetzt die Kantenerkennung auf dem gereinigten fgmask
     edges = cv2.Canny(fgmask, 60, 130)
 
-    # === Zwei Opening-Schritte: (Erosion + Dilation) zweimal nacheinander ===
-    kernel = np.ones((5, 5), np.uint8)
-    edges_clean = edges.copy()
-    for _ in range(2):
-        edges_clean = cv2.erode(edges_clean, kernel, iterations=1)
-        edges_clean = cv2.dilate(edges_clean, kernel, iterations=1)
+    # Morphologische Reinigung NACH Canny
+    edges_clean = cv2.erode(edges, kernel, iterations=1)
+    edges_clean = cv2.dilate(edges_clean, kernel, iterations=1)
 
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
     final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
     out = np.zeros_like(frame)
-    out[final_mask > 0] = [255,255,255]
+    out[final_mask > 0] = [255, 255, 255]
 
     cv2.imshow('Hybrid Silhouette', out)
     if cv2.waitKey(1) & 0xFF == 27:
