@@ -24,7 +24,7 @@ for i in range(calibration_frames):
     if cv2.waitKey(10) & 0xFF == 27:
         break
 
-print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
+print("Kalibrierung abgeschlossen. Du kannst jetzt ins Bild.")
 
 # ====== Hauptloop ======
 while True:
