@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker" />
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker">
+      <change beforePath="$PROJECT_DIR$/Uebertragung/Video_Matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uebertragung/Video_Matrix.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,31 +170,7 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1763563795731" duration="4117000" />
       <workItem from="1764161434767" duration="428000" />
-      <workItem from="1764161950989" duration="3980000" />
-    </task>
-    <task id="LOCAL-00008" summary="bild">
-      <option name="closed" value="true" />
-      <created>1763565836571</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1763565836571</updated>
-    </task>
-    <task id="LOCAL-00009" summary="bild">
-      <option name="closed" value="true" />
-      <created>1763565888366</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1763565888366</updated>
-    </task>
-    <task id="LOCAL-00010" summary="bild">
-      <option name="closed" value="true" />
-      <created>1763565924708</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1763565924708</updated>
+      <workItem from="1764161950989" duration="4358000" />
     </task>
     <task id="LOCAL-00011" summary="bild">
       <option name="closed" value="true" />
@@ -562,7 +540,31 @@
       <option name="project" value="LOCAL" />
       <updated>1764166397735</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764166581998</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1764166581998</updated>
+    </task>
+    <task id="LOCAL-00058" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764166698686</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1764166698686</updated>
+    </task>
+    <task id="LOCAL-00059" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764166785509</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1764166785509</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
