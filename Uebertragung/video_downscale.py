@@ -2,7 +2,7 @@ import cv2
 from PIL import Image
 import numpy as np
 
-input_path = 'bad-apple.mp4'
+input_path = 'WhatsApp Video 2025-11-27 um 09.34.23_98f0ff13.mp4'
 output_path = 'output_32x32.mp4'
 
 cap = cv2.VideoCapture(input_path)
