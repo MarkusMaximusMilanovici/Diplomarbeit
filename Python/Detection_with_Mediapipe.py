@@ -45,7 +45,7 @@ while True:
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
-    kernel = np.ones((5, 5), np.uint8)
+    kernel = np.ones((7, 7), np.uint8)
 
     # Vorverarbeitung: Erode und Dilate
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
