@@ -11,3 +11,15 @@
 
 ## main.py
   Die Funktion der Kamera getestet -> eingeschalten und gesehen wie die Kamera mit NoIR das ganze Aufnimmt und wie gut die Auflösung ist -> basic funktionen
+
+## Detection_with_Mediapipe
+  Die Personenerfassung und die wandlung auf schwarz und weiß mit KI model Mediapipe durch Errode und Dilate, KNN Subtractor, Kantenerkennung und Opening und Closing
+  
+## Detection_BinaryMask
+  Die Personenerfassung mit einem Ascii MIrror Algorithm, wo alles weiße eine null ist und die PErson selber weiß
+  
+## Detection_with_Bodypix
+  Das gleiche nur diesmal wird eine andere KI verwendet, welche auf andere Dinge spezialisiert ist
+  
+## Luma_Spidev_LEDTEST
+  Mit der Luma library die Led-Matrizen ansteuern

@@ -16,3 +16,15 @@ spi.writebytes([0x0F, 0x00] * 4)  # Display test OFF
 spi.writebytes([0x0C, 0x00] * 4)  # Shutdown (optional)
 
 spi.close()
+
+
+in[20]
+out[20]
+
+for i in range(0, 10):
+    in[i] = 1
+
+for i in range(10, 20):
+    in[i] = 0
+
+for i in range(0, 20):

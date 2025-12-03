@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Init">
-      <change beforePath="$PROJECT_DIR$/Python/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/Diplomarbeit.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python/Detection_with_bodypix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/Detection_BinaryMask.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_BinaryMask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,18 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MarkusMaximusMilanovici"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MarkusMaximusMilanovici&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MarkusMaximusMilanovici/Diplomarbeit.git",
-    "accountId": "c9e15b52-1e20-4fee-871b-28daf44d39db"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MarkusMaximusMilanovici/Diplomarbeit.git&quot;,
+    &quot;accountId&quot;: &quot;c9e15b52-1e20-4fee-871b-28daf44d39db&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -46,21 +46,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Ascii_Spiegel.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/rober/Documents/Diplomarbeit/Python",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Ascii_Spiegel.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Diplomarbeit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\rober\Documents\Diplomarbeit\Python" />
@@ -84,6 +85,8 @@
       <updated>1758722323234</updated>
       <workItem from="1758722324316" duration="2585000" />
       <workItem from="1759931219469" duration="440000" />
+      <workItem from="1764541966959" duration="25000" />
+      <workItem from="1764684920134" duration="716000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
