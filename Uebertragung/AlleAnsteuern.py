@@ -17,3 +17,6 @@ img = Image.new('1', (32, 32), color=1)
 device.display(img)
 
 print("Alle 16 Blöcke (32x32 LEDs) sind jetzt AN mit voller Helligkeit!")
+
+while True:
+    pass
