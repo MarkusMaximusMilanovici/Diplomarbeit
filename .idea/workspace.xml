@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker">
-      <change beforePath="$PROJECT_DIR$/Uebertragung/output_32x32.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/Uebertragung/output_32x32.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Uebertragung/video_downscale.py" beforeDir="false" afterPath="$PROJECT_DIR$/Uebertragung/video_downscale.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,25 +47,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Ascii_Spiegel.executor": "Run",
-    "Python.Video_Matrix.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.video_downscale.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "BildUebertragung",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/manue/Documents/Schule/Diplomarbeit/Uebertragung",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Ascii_Spiegel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Video_Matrix.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.video_downscale.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;BildUebertragung&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/manue/Documents/Dic-Uebungen/PythonUebungen/PythonProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\manue\Documents\Schule\Diplomarbeit\Uebertragung" />
@@ -171,15 +170,9 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1763563795731" duration="4117000" />
       <workItem from="1764161434767" duration="428000" />
-      <workItem from="1764161950989" duration="8405000" />
-    </task>
-    <task id="LOCAL-00035" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763631025972</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1763631025972</updated>
+      <workItem from="1764161950989" duration="10523000" />
+      <workItem from="1764505410029" duration="1933000" />
+      <workItem from="1764570748777" duration="2158000" />
     </task>
     <task id="LOCAL-00036" summary="tweaker">
       <option name="closed" value="true" />
@@ -565,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764231711642</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764232554833</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1764232554833</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
