@@ -44,7 +44,7 @@ def release_camera(cam):
         cam.release()
 
 # ============================================================
-# Dein ursprünglicher Code ab hier, nur mit get_frame() statt cap.read()
+# MediaPipe + Background-Subtractor
 # ============================================================
 
 mp_selfie = mp.solutions.selfie_segmentation
@@ -61,10 +61,16 @@ for i in range(calibration_frames):
     ret, frame = get_frame(cam)
     if not ret:
         break
+
+    # Frame für Kalibrierung ebenfalls drehen + skalieren, damit alles konsistent ist
+    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)      # 90° drehen
+    frame = cv2.resize(frame, (72, 128), interpolation=cv2.INTER_AREA)  # 72x128 (Breite x Höhe)
+
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     fgbg.apply(gray, learningRate=0.5)
-    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50),
-                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (5, 20),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
     cv2.imshow('Kalibrierung', frame)
     if cv2.waitKey(10) & 0xFF == 27:
         break
@@ -77,11 +83,18 @@ while True:
     if not ret:
         break
 
+    # 1) Frame drehen (90° im Uhrzeigersinn)
+    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+
+    # 2) Auf 72x128 (9:16) verkleinern
+    frame = cv2.resize(frame, (72, 128), interpolation=cv2.INTER_AREA)
+
+    # Ab hier nur noch das gedrehte, verkleinerte frame verwenden
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (11, 11), 0)
     median = cv2.medianBlur(blurred, 9)
 
-    # MediaPipe Person Segmentierung
+    # MediaPipe Person Segmentierung (RGB erwartet)
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.5).astype(np.uint8) * 255
