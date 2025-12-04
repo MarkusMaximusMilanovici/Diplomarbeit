@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Init">
-      <change afterPath="$PROJECT_DIR$/Python/Detection_with_bodypix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Detection_BinaryMask.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_BinaryMask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +83,7 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1764541966959" duration="25000" />
       <workItem from="1764684920134" duration="716000" />
+      <workItem from="1764771166787" duration="5649000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -96,7 +93,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759931526162</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Init">
+      <option name="closed" value="true" />
+      <created>1764771186213</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764771186213</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Init">
+      <option name="closed" value="true" />
+      <created>1764771211444</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764771211444</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

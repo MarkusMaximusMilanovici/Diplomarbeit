@@ -2,24 +2,69 @@ import cv2
 import numpy as np
 import mediapipe as mp
 
-mp_selfie = mp.solutions.selfie_segmentation
+# ============================================================
+# Kamera-Auswahl: Raspberry Pi (PiCamera2) ODER Laptop (cv2.VideoCapture)
+# ============================================================
+USE_PI = False
+try:
+    from picamera2 import Picamera2
+    USE_PI = True
+    print("PiCamera2 gefunden – benutze Raspberry-Kamera.")
+except ImportError:
+    USE_PI = False
+    print("PiCamera2 nicht gefunden – benutze cv2.VideoCapture.")
 
-cap = cv2.VideoCapture(0)
+def init_camera():
+    if USE_PI:
+        picam2 = Picamera2()
+        # Auflösung anpassen, falls nötig
+        config = picam2.create_preview_configuration(
+            main={"format": "BGR888", "size": (640, 480)}
+        )
+        picam2.configure(config)
+        picam2.start()
+        return picam2
+    else:
+        cap = cv2.VideoCapture(0)
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        return cap
+
+def get_frame(cam):
+    if USE_PI:
+        frame = cam.capture_array()
+        return True, frame
+    else:
+        return cam.read()
+
+def release_camera(cam):
+    if USE_PI:
+        cam.stop()
+    else:
+        cam.release()
+
+# ============================================================
+# Dein ursprünglicher Code ab hier, nur mit get_frame() statt cap.read()
+# ============================================================
+
+mp_selfie = mp.solutions.selfie_segmentation
 segmenter = mp_selfie.SelfieSegmentation(model_selection=1)
 fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=400, detectShadows=False)
+
+cam = init_camera()
 
 # === Kalibrierungsphase für den Hintergrund ===
 calibration_frames = 100
 print("Kalibrierung: Bitte den sichtbaren Bereich verlassen. Die Kamera lernt den Hintergrund.")
 
 for i in range(calibration_frames):
-    ret, frame = cap.read()
+    ret, frame = get_frame(cam)
     if not ret:
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     fgbg.apply(gray, learningRate=0.5)
-    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50), cv2.FONT_HERSHEY_SIMPLEX, 1,
-                (0, 255, 0), 2)
+    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow('Kalibrierung', frame)
     if cv2.waitKey(10) & 0xFF == 27:
         break
@@ -28,7 +73,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== Hauptloop ======
 while True:
-    ret, frame = cap.read()
+    ret, frame = get_frame(cam)
     if not ret:
         break
 
@@ -41,7 +86,7 @@ while True:
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.5).astype(np.uint8) * 255
 
-    # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
+    # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
@@ -54,10 +99,8 @@ while True:
     # Canny-Kantenerkennung auf dem vorverarbeiteten fgmask
     edges = cv2.Canny(fgmask, 60, 130)
 
-    # --- Opening (Erosion gefolgt von Dilation) auf Kantenbild ---
+    # Opening und Closing auf Kantenbild
     edges_open = cv2.morphologyEx(edges, cv2.MORPH_OPEN, kernel)
-
-    # --- Closing (Dilation gefolgt von Erosion) auf Kantenbild ---
     edges_clean = cv2.morphologyEx(edges_open, cv2.MORPH_CLOSE, kernel)
 
     # Hybrid-Maske bilden
@@ -71,6 +114,5 @@ while True:
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
-
-cap.release()
+release_camera(cam)
 cv2.destroyAllWindows()
