@@ -122,9 +122,9 @@ while True:
     out_full[final_mask > 0] = [255, 255, 255]
 
     # === JETZT erst Downscalen auf 72x128 (Breite x Höhe, 9:16) ===
-    out_small = cv2.resize(out_full, (72, 128), interpolation=cv2.INTER_AREA)
+    out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
 
-    cv2.imshow('Hybrid Silhouette (72x128)', out_small)
+    cv2.imshow('Hybrid Silhouette (32x32)', out_small)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
