@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import mediapipe as mp
 import ImagetoMatrix
-from Python.ImagetoMatrix import drawImage
 
 # ============================================================
 # Kamera-Auswahl: Raspberry Pi (PiCamera2) ODER Laptop (cv2.VideoCapture)
@@ -128,7 +127,7 @@ while True:
 
     cv2.imshow('Hybrid Silhouette (32x32)', out_small)
 
-    drawImage(out_small)
+    ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
