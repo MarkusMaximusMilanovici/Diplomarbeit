@@ -1,0 +1,34 @@
+import time
+from PIL import Image
+from luma.led_matrix.device import max7219
+from luma.core.interface.serial import spi, noop
+import cv2
+import numpy as np
+
+serial = spi(port=0, device=0, gpio=noop())
+device = max7219(serial, block_orientation=-90, width = 32, height = 32)
+device.contrast(10)
+
+print(device.width)
+print(device.height)
+
+def drawImage (frame):
+    # 2. und 4. 8er-Zeilenblock drehen
+    zweite = frame[8:16, :]
+    vierte = frame[24:32, :]
+
+    frame[8:16, :] = np.rot90(zweite, 2)
+    frame[24:32, :] = np.rot90(vierte, 2)
+
+    # BGR -> GRAY
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # PIL-Image aus Graustufen machen
+    img = Image.fromarray(gray)
+
+    # Bildmodus an Device anpassen (oft "1" oder "L")
+    img = img.convert(device.mode)
+
+    device.display(img)
+    time.sleep(1/30)
+

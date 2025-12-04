@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker" />
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tweaker">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,31 +173,7 @@
       <workItem from="1764161950989" duration="10523000" />
       <workItem from="1764505410029" duration="1933000" />
       <workItem from="1764570748777" duration="2158000" />
-      <workItem from="1764767510009" duration="306000" />
-    </task>
-    <task id="LOCAL-00037" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763631791361</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1763631791361</updated>
-    </task>
-    <task id="LOCAL-00038" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763631927345</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1763631927345</updated>
-    </task>
-    <task id="LOCAL-00039" summary="tweaker">
-      <option name="closed" value="true" />
-      <created>1763632080548</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1763632080548</updated>
+      <workItem from="1764767510009" duration="1952000" />
     </task>
     <task id="LOCAL-00040" summary="tweaker">
       <option name="closed" value="true" />
@@ -565,7 +543,31 @@
       <option name="project" value="LOCAL" />
       <updated>1764767696371</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764767867377</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1764767867377</updated>
+    </task>
+    <task id="LOCAL-00087" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764768006613</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1764768006613</updated>
+    </task>
+    <task id="LOCAL-00088" summary="tweaker">
+      <option name="closed" value="true" />
+      <created>1764768060680</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1764768060680</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
