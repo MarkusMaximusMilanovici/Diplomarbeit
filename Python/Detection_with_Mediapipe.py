@@ -62,15 +62,14 @@ for i in range(calibration_frames):
     if not ret:
         break
 
-    # Frame für Kalibrierung ebenfalls drehen + skalieren, damit alles konsistent ist
-    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)      # 90° drehen
-    frame = cv2.resize(frame, (72, 128), interpolation=cv2.INTER_AREA)  # 72x128 (Breite x Höhe)
+    # Kamera-Bild direkt drehen, aber noch NICHT downscalen
+    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     fgbg.apply(gray, learningRate=0.5)
 
-    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (5, 20),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+    cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow('Kalibrierung', frame)
     if cv2.waitKey(10) & 0xFF == 27:
         break
@@ -83,13 +82,11 @@ while True:
     if not ret:
         break
 
-    # 1) Frame drehen (90° im Uhrzeigersinn)
+    # 1) Frame drehen (90° im Uhrzeigersinn), volle Auflösung behalten
     frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
-    # 2) Auf 72x128 (9:16) verkleinern
-    frame = cv2.resize(frame, (72, 128), interpolation=cv2.INTER_AREA)
+    # --- ab hier alles in voller (gedrehter) Auflösung berechnen ---
 
-    # Ab hier nur noch das gedrehte, verkleinerte frame verwenden
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (11, 11), 0)
     median = cv2.medianBlur(blurred, 9)
@@ -120,10 +117,14 @@ while True:
     final_mask = ki_mask.copy()
     final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
-    out = np.zeros_like(frame)
-    out[final_mask > 0] = [255, 255, 255]
+    # Ausgabebild in voller Auflösung
+    out_full = np.zeros_like(frame)
+    out_full[final_mask > 0] = [255, 255, 255]
 
-    cv2.imshow('Hybrid Silhouette', out)
+    # === JETZT erst Downscalen auf 72x128 (Breite x Höhe, 9:16) ===
+    out_small = cv2.resize(out_full, (72, 128), interpolation=cv2.INTER_AREA)
+
+    cv2.imshow('Hybrid Silhouette (72x128)', out_small)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
