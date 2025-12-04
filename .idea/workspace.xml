@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="mit Picamera anstatt VideoCApture und verwendbar für laptop und Pi">
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="jetzt wird 32:32 weil das auf die jetztigen Leds abgespielt werden kann">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +84,7 @@
       <workItem from="1759931219469" duration="440000" />
       <workItem from="1764541966959" duration="25000" />
       <workItem from="1764684920134" duration="716000" />
-      <workItem from="1764771166787" duration="8653000" />
+      <workItem from="1764771166787" duration="9872000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -119,7 +118,31 @@
       <option name="project" value="LOCAL" />
       <updated>1764835845356</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen">
+      <option name="closed" value="true" />
+      <created>1764841091614</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764841091614</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen und es wird mit voller Auflösung gerechnet und erst am Ende dowgescalet">
+      <option name="closed" value="true" />
+      <created>1764841220334</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764841220334</updated>
+    </task>
+    <task id="LOCAL-00007" summary="jetzt wird 32:32 weil das auf die jetztigen Leds abgespielt werden kann">
+      <option name="closed" value="true" />
+      <created>1764841406485</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764841406485</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,7 +162,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Init" />
     <MESSAGE value="mit Picamera anstatt VideoCApture und verwendbar für laptop und Pi" />
-    <option name="LAST_COMMIT_MESSAGE" value="mit Picamera anstatt VideoCApture und verwendbar für laptop und Pi" />
+    <MESSAGE value="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen" />
+    <MESSAGE value="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen und es wird mit voller Auflösung gerechnet und erst am Ende dowgescalet" />
+    <MESSAGE value="jetzt wird 32:32 weil das auf die jetztigen Leds abgespielt werden kann" />
+    <option name="LAST_COMMIT_MESSAGE" value="jetzt wird 32:32 weil das auf die jetztigen Leds abgespielt werden kann" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
