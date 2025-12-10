@@ -25,10 +25,12 @@
 --  Schienensystem für LEDs zum rein und raus bringen
 - - Platte zwischen LED Bauteilhälften anbringen für Schienensystem Entwickelt
 
-# Design 2.0 
+## Design 2.0 
 
 ### Grunddaten 
 - Da das 3D Drucken des Cases verschiedenste Probleme berreitet hat die nicht sinvoll zu lösen waren haben wir uns dazu entschieden das Case aus noch unbestimmten Material bzw unbestimmter Aufbau
 - Wir haben einen Plan für den Mechanismus dieser ist wie folgt:
 - - Zwischen den 2 LED teilen (Platine und LEDköpfe) eine Platte Einbauen um sie dann als Komplette Matrix in das Case mit einem Schiebemechanismus bzw einem Schiebesystem hineinzuschieben
 - - Lösung dafür das die Platte dann im Case bleibt haben wir nicht genau aber wird schon irgendwie gehen
+
+# Design Neuauflage 
