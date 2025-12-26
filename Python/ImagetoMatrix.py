@@ -1,18 +1,27 @@
-import time
-from PIL import Image
-from luma.led_matrix.device import max7219
-from luma.core.interface.serial import spi, noop
+# ImagetoMatrix.py
+import sys
 import cv2
 import numpy as np
+from PIL import Image
 
-serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, block_orientation=-90, width = 32, height = 32)
-device.contrast(10)
+RUN_ON_PI = sys.platform.startswith("linux")
 
-print(device.width)
-print(device.height)
+if RUN_ON_PI:
+    from luma.led_matrix.device import max7219
+    from luma.core.interface.serial import spi, noop
 
-def drawImage (frame):
+    serial = spi(port=0, device=0, gpio=noop())
+    device = max7219(serial, block_orientation=-90, width=32, height=32)
+    device.contrast(10)
+else:
+    device = None  # Platzhalter ohne Hardware
+
+
+def drawImage(frame):
+    # Auf dem Laptop: einfach nichts machen
+    if device is None:
+        return
+
     # 2. und 4. 8er-Zeilenblock drehen
     zweite = frame[8:16, :]
     vierte = frame[24:32, :]
@@ -20,15 +29,8 @@ def drawImage (frame):
     frame[8:16, :] = np.rot90(zweite, 2)
     frame[24:32, :] = np.rot90(vierte, 2)
 
-    # BGR -> GRAY
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-    # PIL-Image aus Graustufen machen
     img = Image.fromarray(gray)
-
-    # Bildmodus an Device anpassen (oft "1" oder "L")
     img = img.convert(device.mode)
 
     device.display(img)
-    time.sleep(1/30)
-

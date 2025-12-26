@@ -84,7 +84,7 @@ while True:
         break
 
     # 1) Frame drehen (90° im Uhrzeigersinn), volle Auflösung behalten
-    frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    frame = frame #cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
     # --- ab hier alles in voller (gedrehter) Auflösung berechnen ---
 
@@ -95,11 +95,12 @@ while True:
     # MediaPipe Person Segmentierung (RGB erwartet)
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
-    ki_mask = (res.segmentation_mask > 0.5).astype(np.uint8) * 255
+    ki_mask = (res.segmentation_mask > 0.4).astype(np.uint8) * 255
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
+    #ki_mask = cv2.medianBlur(ki_mask, 5)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
     kernel = np.ones((7, 7), np.uint8)
 
@@ -117,17 +118,36 @@ while True:
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
     final_mask = cv2.bitwise_or(final_mask, edges_clean)
+    kernel = np.ones((3, 3), np.uint8)
 
-    # Ausgabebild in voller Auflösung
+    # 1) Kleine Löcher schließen (Closing: Dilate -> Erode)
+    final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel, iterations=2)
+
+    # 2) Silhouette leicht verdicken (Dilation)
+    final_mask = cv2.dilate(final_mask, kernel, iterations=1)
+    # --- Konturen der Person holen und füllen ---
+    contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    mask_filled = np.zeros_like(final_mask)
+    if len(contours) > 0:
+        largest = max(contours, key=cv2.contourArea)
+        cv2.drawContours(mask_filled, [largest], -1, 255, thickness=cv2.FILLED)
+
+    final_mask = mask_filled
+
+    # Ausgabebild in voller Auflösung (reine Silhouette)
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
-    # === JETZT erst Downscalen auf 72x128 (Breite x Höhe, 9:16) ===
-    out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
+    # === Große Fensteranzeige (1280x720) ===
+    preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
+    cv2.imshow('Hybrid Silhouette (gross)', preview)
 
-    cv2.imshow('Hybrid Silhouette (32x32)', out_small)
+    # === JETZT erst Downscalen auf 32x32 für die Matrix ===
+    #out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
+    #cv2.imshow('Hybrid Silhouette (32x32)', out_small)
 
-    ImagetoMatrix.drawImage(out_small)
+    #ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
