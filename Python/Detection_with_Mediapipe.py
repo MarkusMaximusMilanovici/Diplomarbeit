@@ -113,7 +113,7 @@ while True:
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 # kleiner weißer Punkt an jeder Landmark-Position
-                cv2.circle(ki_mask, (cx, cy), 5, 255, -1)
+                cv2.circle(ki_mask, (cx, cy), 2, 255, -1)
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
@@ -134,11 +134,11 @@ while True:
 
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
-    final_mask = cv2.bitwise_or(final_mask, edges_clean)
+    ######final_mask = cv2.bitwise_or(final_mask, edges_clean)
     kernel = np.ones((3, 3), np.uint8)
 
     # 1) Kleine Löcher schließen (Closing: Dilate -> Erode)
-    final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel, iterations=2)
+    final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel, iterations=1)
 
     # 2) Silhouette leicht verdicken (Dilation)
     final_mask = cv2.dilate(final_mask, kernel, iterations=1)
