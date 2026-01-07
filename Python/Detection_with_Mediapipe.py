@@ -50,6 +50,15 @@ def release_camera(cam):
 
 mp_selfie = mp.solutions.selfie_segmentation
 segmenter = mp_selfie.SelfieSegmentation(model_selection=1)
+
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(
+    static_image_mode=False,
+    max_num_hands=2,
+    min_detection_confidence=0.6,
+    min_tracking_confidence=0.5
+)
+
 fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=400, detectShadows=False)
 
 cam = init_camera()
@@ -84,25 +93,33 @@ while True:
         break
 
     # 1) Frame drehen (90° im Uhrzeigersinn), volle Auflösung behalten
-    frame = frame #cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    frame = frame  # oder: cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
-    # --- ab hier alles in voller (gedrehter) Auflösung berechnen ---
+    # --- ab hier alles in voller Auflösung berechnen ---
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blurred = cv2.GaussianBlur(gray, (11, 11), 0)
-    median = cv2.medianBlur(blurred, 9)
 
     # MediaPipe Person Segmentierung (RGB erwartet)
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.4).astype(np.uint8) * 255
 
+    # ===== Hände erkennen und in die KI-Maske malen =====
+    hand_res = hands.process(rgb)
+
+    if hand_res.multi_hand_landmarks:
+        h, w, _ = frame.shape
+        for handLms in hand_res.multi_hand_landmarks:
+            for lm in handLms.landmark:
+                cx, cy = int(lm.x * w), int(lm.y * h)
+                # kleiner weißer Punkt an jeder Landmark-Position
+                cv2.circle(ki_mask, (cx, cy), 5, 255, -1)
+
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 7)
-    #ki_mask = cv2.medianBlur(ki_mask, 5)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
-    kernel = np.ones((7, 7), np.uint8)
+    kernel = np.ones((5, 5), np.uint8)
 
     # Vorverarbeitung: Erode und Dilate
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
@@ -125,6 +142,7 @@ while True:
 
     # 2) Silhouette leicht verdicken (Dilation)
     final_mask = cv2.dilate(final_mask, kernel, iterations=1)
+
     # --- Konturen der Person holen und füllen ---
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -139,15 +157,15 @@ while True:
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
-    # === Große Fensteranzeige (1280x720) ===
+    # === Große Fensteranzeige (640x480) ===
     preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
     cv2.imshow('Hybrid Silhouette (gross)', preview)
 
     # === JETZT erst Downscalen auf 32x32 für die Matrix ===
-    #out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
-    #cv2.imshow('Hybrid Silhouette (32x32)', out_small)
+    # out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
+    # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
 
-    #ImagetoMatrix.drawImage(out_small)
+    # ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
