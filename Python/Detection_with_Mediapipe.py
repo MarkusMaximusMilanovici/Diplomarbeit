@@ -18,7 +18,6 @@ except ImportError:
 def init_camera():
     if USE_PI:
         picam2 = Picamera2()
-        # Auflösung anpassen, falls nötig
         config = picam2.create_preview_configuration(
             main={"format": "BGR888", "size": (640, 480)}
         )
@@ -56,7 +55,7 @@ hands = mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=2,
     min_detection_confidence=0.6,
-    min_tracking_confidence=0.5
+    min_tracking_confidence=0.7  # etwas stabiler
 )
 
 fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=400, detectShadows=False)
@@ -72,7 +71,6 @@ for i in range(calibration_frames):
     if not ret:
         break
 
-    # KEIN Rotieren
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     fgbg.apply(gray, learningRate=0.5)
 
@@ -84,13 +82,16 @@ for i in range(calibration_frames):
 
 print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
+# ====== zeitliche Glättung vorbereiten ======
+prev_mask = None
+alpha = 0.2 # Anteil der alten Maske
+
 # ====== Hauptloop ======
 while True:
     ret, frame = get_frame(cam)
     if not ret:
         break
 
-    # KEIN Rotieren
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # MediaPipe Person Segmentierung (RGB erwartet)
@@ -106,7 +107,6 @@ while True:
         for handLms in hand_res.multi_hand_landmarks:
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                # kleiner weißer Punkt an jeder Landmark-Position
                 cv2.circle(ki_mask, (cx, cy), 2, 255, -1)
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
@@ -115,48 +115,45 @@ while True:
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
     kernel = np.ones((5, 5), np.uint8)
 
-    # Vorverarbeitung: Erode und Dilate
     fgmask = cv2.erode(fgmask, kernel, iterations=1)
     fgmask = cv2.dilate(fgmask, kernel, iterations=1)
 
-    # Canny-Kantenerkennung auf dem vorverarbeiteten fgmask
     edges = cv2.Canny(fgmask, 60, 130)
-
-    # Opening und Closing auf Kantenbild
     edges_open = cv2.morphologyEx(edges, cv2.MORPH_OPEN, kernel)
     edges_clean = cv2.morphologyEx(edges_open, cv2.MORPH_CLOSE, kernel)
 
-    # Hybrid-Maske bilden (KNN optional)
+    # Hybrid-Maske bilden (KNN derzeit aus, bei Bedarf einkommentieren)
     final_mask = ki_mask.copy()
-    # final_mask = cv2.bitwise_or(final_mask, edges_clean)  # bei Bedarf wieder aktivieren
+    # final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
     kernel_small = np.ones((3, 3), np.uint8)
-
-    # 1) Kleine Löcher schließen
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
-
-    # 2) Silhouette leicht verdicken (wenn zu fett: Zeile auskommentieren)
     final_mask = cv2.dilate(final_mask, kernel_small, iterations=1)
 
     # --- Konturen der Person holen und füllen ---
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
     mask_filled = np.zeros_like(final_mask)
     if len(contours) > 0:
         largest = max(contours, key=cv2.contourArea)
         cv2.drawContours(mask_filled, [largest], -1, 255, thickness=cv2.FILLED)
-
     final_mask = mask_filled
+
+    # ===== zeitliche Glättung der Maske =====
+    if prev_mask is None:
+        prev_mask = final_mask.copy()
+    else:
+        blended = cv2.addWeighted(prev_mask, alpha, final_mask, 1 - alpha, 0)
+        _, blended = cv2.threshold(blended, 127, 255, cv2.THRESH_BINARY)
+        prev_mask = blended
+        final_mask = blended
 
     # Ausgabebild in voller Auflösung (reine Silhouette)
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
-    # Anzeige
     preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
     cv2.imshow('Hybrid Silhouette (gross)', preview)
 
-    # Downscale für Matrix (falls benötigt)
     # out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
     # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
     # ImagetoMatrix.drawImage(out_small)
