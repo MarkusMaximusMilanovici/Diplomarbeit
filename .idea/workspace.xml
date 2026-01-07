@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Da die Finger bzw die HAnd nicht gefasst wird, hab ich von MEdiaPipe das HAndtracking genommen wo an den Knöcheln der HAnd Punkte miteinander verbunden. Um die Punkte sollen kleine kreise gemacht werden.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" afterDir="false" />
-    </list>
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Den Radius der Kreise kleiner gemacht und am closing der Morpholgie das iterations von 2 auf 1 gewechselt" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +89,7 @@
       <workItem from="1766002274786" duration="7766000" />
       <workItem from="1766395862270" duration="16000" />
       <workItem from="1766746216669" duration="4708000" />
-      <workItem from="1767788953316" duration="1782000" />
+      <workItem from="1767788953316" duration="2310000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -182,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767798381627</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Den Radius der Kreise kleiner gemacht und am closing der Morpholgie das iterations von 2 auf 1 gewechselt">
+      <option name="closed" value="true" />
+      <created>1767799083173</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1767799083173</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,11 +213,12 @@
     <MESSAGE value="der Output wird auf der MAtrix angezeigt" />
     <MESSAGE value="ein bisschen mit den ZAhlen gespielt Threshold und anstadt Maske Konturen verwendet am Ende, soll das Rauschen etwas wegmachen und die Finhger sollen durch die Zahlen Spielerei und durch das Closing und dilate besser dargestellt werden" />
     <MESSAGE value="Da die Finger bzw die HAnd nicht gefasst wird, hab ich von MEdiaPipe das HAndtracking genommen wo an den Knöcheln der HAnd Punkte miteinander verbunden. Um die Punkte sollen kleine kreise gemacht werden." />
-    <option name="LAST_COMMIT_MESSAGE" value="Da die Finger bzw die HAnd nicht gefasst wird, hab ich von MEdiaPipe das HAndtracking genommen wo an den Knöcheln der HAnd Punkte miteinander verbunden. Um die Punkte sollen kleine kreise gemacht werden." />
+    <MESSAGE value="Den Radius der Kreise kleiner gemacht und am closing der Morpholgie das iterations von 2 auf 1 gewechselt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Den Radius der Kreise kleiner gemacht und am closing der Morpholgie das iterations von 2 auf 1 gewechselt" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1767798701745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1767798731687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$ImagetoMatrix.coverage" NAME="ImagetoMatrix Coverage Results" MODIFIED="1766047077488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
   </component>
 </project>
