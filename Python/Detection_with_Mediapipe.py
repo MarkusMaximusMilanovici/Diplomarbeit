@@ -72,6 +72,17 @@ for i in range(calibration_frames):
         break
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Helligkeit/Kontrast grob anheben
+    alpha_bright = 1.3  # Kontrast
+    beta_bright = 20  # Helligkeit
+    frame_enh = cv2.convertScaleAbs(frame, alpha=alpha_bright, beta=beta_bright)
+
+    # Für Mediapipe dieses hellere Bild nehmen
+    rgb = cv2.cvtColor(frame_enh, cv2.COLOR_BGR2RGB)
+    res = segmenter.process(rgb)
+    hand_res = hands.process(rgb)
+
     fgbg.apply(gray, learningRate=0.5)
 
     cv2.putText(frame, f'Kalibrierung: {i + 1}/{calibration_frames}', (40, 50),
@@ -84,7 +95,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-alpha = 0.2 # Anteil der alten Maske
+alpha = 0.3 # Anteil der alten Maske
 
 # ====== Hauptloop ======
 while True:
@@ -124,7 +135,7 @@ while True:
 
     # Hybrid-Maske bilden (KNN derzeit aus, bei Bedarf einkommentieren)
     final_mask = ki_mask.copy()
-    # final_mask = cv2.bitwise_or(final_mask, edges_clean)
+    #final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
     kernel_small = np.ones((3, 3), np.uint8)
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
