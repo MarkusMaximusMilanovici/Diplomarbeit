@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="tracking confidence erhöht von 0.5 auf 0.7 und eine zeitliche Glättung eingefügt wo das letzte Bild mitspielt damit die Hand nicht sofort verschwindet oder wie vorher das sie kurz einfach weggeht">
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" afterDir="false" />
     </list>
@@ -93,7 +93,7 @@
       <workItem from="1766395862270" duration="16000" />
       <workItem from="1766746216669" duration="4708000" />
       <workItem from="1767788953316" duration="2916000" />
-      <workItem from="1767856441548" duration="926000" />
+      <workItem from="1767856441548" duration="4050000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -207,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767800003923</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller">
+      <option name="closed" value="true" />
+      <created>1767857713760</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1767857713760</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,11 +244,12 @@
     <MESSAGE value="Den Radius der Kreise kleiner gemacht und am closing der Morpholgie das iterations von 2 auf 1 gewechselt" />
     <MESSAGE value="Der KNN Subtractor hat ein umgekehrtes Bild Bekommen anfänglich und dannch wieder umgedreht, jetzt bekommt es ein normales Bild" />
     <MESSAGE value="tracking confidence erhöht von 0.5 auf 0.7 und eine zeitliche Glättung eingefügt wo das letzte Bild mitspielt damit die Hand nicht sofort verschwindet oder wie vorher das sie kurz einfach weggeht" />
-    <option name="LAST_COMMIT_MESSAGE" value="tracking confidence erhöht von 0.5 auf 0.7 und eine zeitliche Glättung eingefügt wo das letzte Bild mitspielt damit die Hand nicht sofort verschwindet oder wie vorher das sie kurz einfach weggeht" />
+    <MESSAGE value="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1767857474919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1767858371709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$ImagetoMatrix.coverage" NAME="ImagetoMatrix Coverage Results" MODIFIED="1766047077488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
   </component>
 </project>
