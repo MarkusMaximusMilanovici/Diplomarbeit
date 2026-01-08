@@ -1,4 +1,8 @@
 # Diplomarbeit
+
+## LINK für Docs
+https://docs.google.com/document/d/1WH5tCRd0Api436s9G5jYEZzmVug9cEUj/edit
+
 ## Detection.py 
   Eine Body Detection oder Face Detection testen -> mit Vorlagen aus Github für Die Ganzen Erkennungen -> Funktioniert hauptsächlich aber die FrontalFace         funktioniert gut, jedoch unnötig aber war gut zum testen wie die Kamera so mithält
 
