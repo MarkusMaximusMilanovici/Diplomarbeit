@@ -59,7 +59,7 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=2,
-    min_detection_confidence=0.5,  # Etwas niedriger für bessere Erkennung
+    min_detection_confidence=0.5,
     min_tracking_confidence=0.6
 )
 
@@ -100,7 +100,9 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-alpha = 0.3  # Reduziert für schnellere Reaktion auf Hände
+prev_hand_mask = None  # Separate Glättung für Hände
+alpha = 0.3  # Glättung für Körper
+alpha_hand = 0.5  # Stärkere Glättung für Hände (mehr Stabilität)
 
 # ====== Hauptloop ======
 while True:
@@ -128,9 +130,9 @@ while True:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 hand_points.append([cx, cy])
 
-            # Zeichne größere Kreise um jeden Landmark
+            # Zeichne mittelgroße Kreise um jeden Landmark (8px = gute Balance)
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 3, 255, -1)
+                cv2.circle(hand_mask, tuple(point), 8, 255, -1)
 
             # Erstelle konvexe Hülle um die Hand für zusammenhängende Fläche
             if len(hand_points) > 0:
@@ -138,15 +140,25 @@ while True:
                 hull = cv2.convexHull(hand_points)
                 cv2.fillConvexPoly(hand_mask, hull, 255)
 
+    # ===== Zeitliche Glättung NUR für die Hand-Maske =====
+    if prev_hand_mask is None:
+        prev_hand_mask = hand_mask.copy()
+    else:
+        # Starke Glättung für Hände = weniger Flackern
+        hand_blended = cv2.addWeighted(prev_hand_mask, alpha_hand, hand_mask, 1 - alpha_hand, 0)
+        _, hand_blended = cv2.threshold(hand_blended, 127, 255, cv2.THRESH_BINARY)
+        prev_hand_mask = hand_blended
+        hand_mask = hand_blended
+
     # Dilatiere Hand-Maske leicht für bessere Sichtbarkeit
     if np.any(hand_mask > 0):
-        kernel_hand = np.ones((5, 5), np.uint8)
-        hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=1)
+        kernel_hand = np.ones((3, 3), np.uint8)
+        hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=2)
 
     # Hand-Maske mit KI-Maske kombinieren (BEVOR weitere Operationen)
     ki_mask = cv2.bitwise_or(ki_mask, hand_mask)
 
-    # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
+    # Bewegungsmaske (optional, derzeit nicht verwendet)
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 5)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
@@ -159,16 +171,15 @@ while True:
     edges_open = cv2.morphologyEx(edges, cv2.MORPH_OPEN, kernel)
     edges_clean = cv2.morphologyEx(edges_open, cv2.MORPH_CLOSE, kernel)
 
-    # Hybrid-Maske bilden (KNN derzeit aus, bei Bedarf einkommentieren)
+    # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
-    # final_mask = cv2.bitwise_or(final_mask, edges_clean)
+    # final_mask = cv2.bitwise_or(final_mask, edges_clean)  # Optional
 
     kernel_small = np.ones((3, 3), np.uint8)
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
     final_mask = cv2.dilate(final_mask, kernel_small, iterations=1)
 
     # --- Konturen der Person holen und füllen ---
-    # ABER: Behalte auch kleine Konturen für Hände, die vom Körper getrennt sind
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     mask_filled = np.zeros_like(final_mask)
 
@@ -179,19 +190,18 @@ while True:
         # Nimm die größte Kontur (Körper)
         cv2.drawContours(mask_filled, [contours_sorted[0]], -1, 255, thickness=cv2.FILLED)
 
-        # Nimm auch kleinere Konturen, falls sie groß genug sind (z.B. Hände)
-        min_area = 500  # Minimale Fläche für separate Konturen
+        # Nimm auch kleinere Konturen (z.B. separate Hände)
+        min_area = 300  # Reduziert für kleinere Hände
         for contour in contours_sorted[1:]:
             if cv2.contourArea(contour) > min_area:
                 cv2.drawContours(mask_filled, [contour], -1, 255, thickness=cv2.FILLED)
 
     final_mask = mask_filled
 
-    # ===== zeitliche Glättung der Maske =====
+    # ===== zeitliche Glättung der gesamten Maske =====
     if prev_mask is None:
         prev_mask = final_mask.copy()
     else:
-        # Reduzierte Glättung für schnellere Handbewegungen
         blended = cv2.addWeighted(prev_mask, alpha, final_mask, 1 - alpha, 0)
         _, blended = cv2.threshold(blended, 127, 255, cv2.THRESH_BINARY)
         prev_mask = blended
