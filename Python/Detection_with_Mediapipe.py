@@ -79,11 +79,10 @@ for i in range(calibration_frames):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Helligkeit/Kontrast grob anheben
-    alpha_bright = 1.3  # Kontrast
-    beta_bright = 20  # Helligkeit
+    alpha_bright = 1.3
+    beta_bright = 20
     frame_enh = cv2.convertScaleAbs(frame, alpha=alpha_bright, beta=beta_bright)
 
-    # Für Mediapipe dieses hellere Bild nehmen
     rgb = cv2.cvtColor(frame_enh, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
     hand_res = hands.process(rgb)
@@ -102,7 +101,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 prev_mask = None
 prev_hand_mask = None
 alpha = 0.3
-alpha_hand = 0.4
+alpha_hand = 0.4  # Maximal 0.4
 
 # ====== Hauptloop ======
 while True:
@@ -112,49 +111,53 @@ while True:
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # MediaPipe Person Segmentierung (RGB erwartet)
+    # MediaPipe Person Segmentierung
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.35).astype(np.uint8) * 255
 
-    # ===== Hände erkennen und separate Hand-Maske erstellen =====
+    # ===== Hände erkennen =====
     hand_res = hands.process(rgb)
     hand_mask = np.zeros_like(ki_mask)
 
     if hand_res.multi_hand_landmarks:
         h, w, _ = frame.shape
         for handLms in hand_res.multi_hand_landmarks:
-            # Sammle alle Hand-Punkte
+            # Sammle alle 21 Hand-Punkte
             hand_points = []
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 hand_points.append([cx, cy])
 
-            # === STRATEGIE 1: Nur Kreise (natürlicher) ===
-            # Zeichne mittelgroße Kreise um jeden Landmark
-            for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 10, 255, -1)
-
-            # === STRATEGIE 2: Verbinde benachbarte Punkte mit Linien ===
-            # MediaPipe Hand hat 21 Landmarks in bestimmter Reihenfolge
-            # Verbindungen zwischen benachbarten Fingerknochen
+            # === MediaPipe Hand Connections (ALLE 5 FINGER) ===
+            # https://google.github.io/mediapipe/solutions/hands.html
             connections = [
-                (0, 1), (1, 2), (2, 3), (3, 4),  # Daumen
-                (0, 5), (5, 6), (6, 7), (7, 8),  # Zeigefinger
-                (5, 9), (9, 10), (10, 11), (11, 12),  # Mittelfinger
-                (9, 13), (13, 14), (14, 15), (15, 16),  # Ringfinger
-                (13, 17), (17, 18), (18, 19), (19, 20),  # Kleiner Finger
-                (0, 17)  # Handgelenk zu Handfläche
+                # Daumen (4 Verbindungen)
+                (0, 1), (1, 2), (2, 3), (3, 4),
+                # Zeigefinger (4 Verbindungen)
+                (0, 5), (5, 6), (6, 7), (7, 8),
+                # Mittelfinger (4 Verbindungen)
+                (0, 9), (9, 10), (10, 11), (11, 12),
+                # Ringfinger (4 Verbindungen)
+                (0, 13), (13, 14), (14, 15), (15, 16),
+                # Kleiner Finger (4 Verbindungen)
+                (0, 17), (17, 18), (18, 19), (19, 20),
+                # Handfläche (verbindet Fingerbasen)
+                (5, 9), (9, 13), (13, 17)
             ]
 
-            # Zeichne dicke Linien zwischen verbundenen Punkten
+            # Zeichne DÜNNE Linien zwischen Punkten (realistischer)
             for connection in connections:
                 if connection[0] < len(hand_points) and connection[1] < len(hand_points):
                     pt1 = tuple(hand_points[connection[0]])
                     pt2 = tuple(hand_points[connection[1]])
-                    cv2.line(hand_mask, pt1, pt2, 255, thickness=18)
+                    cv2.line(hand_mask, pt1, pt2, 255, thickness=8)  # Dünner = 8
 
-    # ===== Zeitliche Glättung NUR für die Hand-Maske =====
+            # Zeichne KLEINE Kreise um Gelenke
+            for point in hand_points:
+                cv2.circle(hand_mask, tuple(point), 5, 255, -1)  # Kleiner = 5
+
+    # ===== Zeitliche Glättung für Hand-Maske =====
     if prev_hand_mask is None:
         prev_hand_mask = hand_mask.copy()
     else:
@@ -163,12 +166,12 @@ while True:
         prev_hand_mask = hand_blended
         hand_mask = hand_blended
 
-    # Dilatiere und Blur für weichere Kanten
+    # NUR leichte Dilatation
     if np.any(hand_mask > 0):
-        kernel_hand = np.ones((5, 5), np.uint8)
+        kernel_hand = np.ones((3, 3), np.uint8)
         hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=1)
-        # Blur macht die Kanten weicher/natürlicher
-        hand_mask = cv2.GaussianBlur(hand_mask, (5, 5), 0)
+        # Leichter Blur für weichere Kanten
+        hand_mask = cv2.GaussianBlur(hand_mask, (3, 3), 0)
         _, hand_mask = cv2.threshold(hand_mask, 127, 255, cv2.THRESH_BINARY)
 
     # Hand-Maske mit KI-Maske kombinieren
@@ -195,7 +198,7 @@ while True:
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
     final_mask = cv2.dilate(final_mask, kernel_small, iterations=1)
 
-    # --- Konturen der Person holen und füllen ---
+    # --- Konturen füllen ---
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     mask_filled = np.zeros_like(final_mask)
 
@@ -203,14 +206,14 @@ while True:
         contours_sorted = sorted(contours, key=cv2.contourArea, reverse=True)
         cv2.drawContours(mask_filled, [contours_sorted[0]], -1, 255, thickness=cv2.FILLED)
 
-        min_area = 300
+        min_area = 200  # Noch kleiner für dünne Finger
         for contour in contours_sorted[1:]:
             if cv2.contourArea(contour) > min_area:
                 cv2.drawContours(mask_filled, [contour], -1, 255, thickness=cv2.FILLED)
 
     final_mask = mask_filled
 
-    # ===== zeitliche Glättung der gesamten Maske =====
+    # ===== Zeitliche Glättung der gesamten Maske =====
     if prev_mask is None:
         prev_mask = final_mask.copy()
     else:
@@ -219,7 +222,7 @@ while True:
         prev_mask = blended
         final_mask = blended
 
-    # Ausgabebild in voller Auflösung (reine Silhouette)
+    # Ausgabebild
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
