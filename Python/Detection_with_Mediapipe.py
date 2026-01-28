@@ -95,7 +95,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-alpha = 0.3 # Anteil der alten Maske
+alpha = 0.4 # Anteil der alten Maske
 
 # ====== Hauptloop ======
 while True:
@@ -118,7 +118,7 @@ while True:
         for handLms in hand_res.multi_hand_landmarks:
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                cv2.circle(ki_mask, (cx, cy), 4, 255, -1)
+                cv2.circle(ki_mask, (cx, cy), 3, 255, -1)
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
