@@ -102,7 +102,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 prev_mask = None
 prev_hand_mask = None
 alpha = 0.3
-alpha_hand = 0.5
+alpha_hand = 0.4
 
 # ====== Hauptloop ======
 while True:
