@@ -95,7 +95,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-alpha = 0.4 # Anteil der alten Maske
+alpha = 0.5 # Anteil der alten Maske
 
 # ====== Hauptloop ======
 while True:
