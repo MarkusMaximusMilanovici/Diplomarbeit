@@ -102,7 +102,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 prev_mask = None
 prev_hand_mask = None  # Separate Glättung für Hände
 alpha = 0.3  # Glättung für Körper
-alpha_hand = 0.5  # Stärkere Glättung für Hände (mehr Stabilität)
+alpha_hand = 0.4  # Stärkere Glättung für Hände (mehr Stabilität)
 
 # ====== Hauptloop ======
 while True:
