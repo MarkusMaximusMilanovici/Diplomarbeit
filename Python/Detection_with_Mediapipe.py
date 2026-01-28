@@ -9,11 +9,13 @@ import ImagetoMatrix
 USE_PI = False
 try:
     from picamera2 import Picamera2
+
     USE_PI = True
     print("PiCamera2 gefunden – benutze Raspberry-Kamera.")
 except ImportError:
     USE_PI = False
     print("PiCamera2 nicht gefunden – benutze cv2.VideoCapture.")
+
 
 def init_camera():
     if USE_PI:
@@ -30,6 +32,7 @@ def init_camera():
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         return cap
 
+
 def get_frame(cam):
     if USE_PI:
         frame = cam.capture_array()
@@ -37,11 +40,13 @@ def get_frame(cam):
     else:
         return cam.read()
 
+
 def release_camera(cam):
     if USE_PI:
         cam.stop()
     else:
         cam.release()
+
 
 # ============================================================
 # MediaPipe + Background-Subtractor
@@ -54,8 +59,8 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=2,
-    min_detection_confidence=0.6, # 0.6
-    min_tracking_confidence=0.7 # 0.7
+    min_detection_confidence=0.5,  # Etwas niedriger für bessere Erkennung
+    min_tracking_confidence=0.6
 )
 
 fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=400, detectShadows=False)
@@ -95,7 +100,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-alpha = 0.5 # Anteil der alten Maske
+alpha = 0.3  # Reduziert für schnellere Reaktion auf Hände
 
 # ====== Hauptloop ======
 while True:
@@ -110,15 +115,36 @@ while True:
     res = segmenter.process(rgb)
     ki_mask = (res.segmentation_mask > 0.35).astype(np.uint8) * 255
 
-    # ===== Hände erkennen und in die KI-Maske malen =====
+    # ===== Hände erkennen und separate Hand-Maske erstellen =====
     hand_res = hands.process(rgb)
+    hand_mask = np.zeros_like(ki_mask)
 
     if hand_res.multi_hand_landmarks:
         h, w, _ = frame.shape
         for handLms in hand_res.multi_hand_landmarks:
+            # Sammle alle Hand-Punkte
+            hand_points = []
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                cv2.circle(ki_mask, (cx, cy), 3, 255, -1)
+                hand_points.append([cx, cy])
+
+            # Zeichne größere Kreise um jeden Landmark
+            for point in hand_points:
+                cv2.circle(hand_mask, tuple(point), 15, 255, -1)
+
+            # Erstelle konvexe Hülle um die Hand für zusammenhängende Fläche
+            if len(hand_points) > 0:
+                hand_points = np.array(hand_points)
+                hull = cv2.convexHull(hand_points)
+                cv2.fillConvexPoly(hand_mask, hull, 255)
+
+    # Dilatiere Hand-Maske leicht für bessere Sichtbarkeit
+    if np.any(hand_mask > 0):
+        kernel_hand = np.ones((5, 5), np.uint8)
+        hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=1)
+
+    # Hand-Maske mit KI-Maske kombinieren (BEVOR weitere Operationen)
+    ki_mask = cv2.bitwise_or(ki_mask, hand_mask)
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
@@ -135,24 +161,37 @@ while True:
 
     # Hybrid-Maske bilden (KNN derzeit aus, bei Bedarf einkommentieren)
     final_mask = ki_mask.copy()
-    #final_mask = cv2.bitwise_or(final_mask, edges_clean)
+    # final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
     kernel_small = np.ones((3, 3), np.uint8)
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
     final_mask = cv2.dilate(final_mask, kernel_small, iterations=1)
 
     # --- Konturen der Person holen und füllen ---
+    # ABER: Behalte auch kleine Konturen für Hände, die vom Körper getrennt sind
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     mask_filled = np.zeros_like(final_mask)
+
     if len(contours) > 0:
-        largest = max(contours, key=cv2.contourArea)
-        cv2.drawContours(mask_filled, [largest], -1, 255, thickness=cv2.FILLED)
+        # Sortiere Konturen nach Größe
+        contours_sorted = sorted(contours, key=cv2.contourArea, reverse=True)
+
+        # Nimm die größte Kontur (Körper)
+        cv2.drawContours(mask_filled, [contours_sorted[0]], -1, 255, thickness=cv2.FILLED)
+
+        # Nimm auch kleinere Konturen, falls sie groß genug sind (z.B. Hände)
+        min_area = 500  # Minimale Fläche für separate Konturen
+        for contour in contours_sorted[1:]:
+            if cv2.contourArea(contour) > min_area:
+                cv2.drawContours(mask_filled, [contour], -1, 255, thickness=cv2.FILLED)
+
     final_mask = mask_filled
 
     # ===== zeitliche Glättung der Maske =====
     if prev_mask is None:
         prev_mask = final_mask.copy()
     else:
+        # Reduzierte Glättung für schnellere Handbewegungen
         blended = cv2.addWeighted(prev_mask, alpha, final_mask, 1 - alpha, 0)
         _, blended = cv2.threshold(blended, 127, 255, cv2.THRESH_BINARY)
         prev_mask = blended
