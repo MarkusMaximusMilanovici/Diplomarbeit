@@ -130,7 +130,7 @@ while True:
 
             # Zeichne größere Kreise um jeden Landmark
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 15, 255, -1)
+                cv2.circle(hand_mask, tuple(point), 3, 255, -1)
 
             # Erstelle konvexe Hülle um die Hand für zusammenhängende Fläche
             if len(hand_points) > 0:
