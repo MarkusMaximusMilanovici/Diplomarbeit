@@ -100,9 +100,9 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
-prev_hand_mask = None  # Separate Glättung für Hände
-alpha = 0.3  # Glättung für Körper
-alpha_hand = 0.4  # Stärkere Glättung für Hände (mehr Stabilität)
+prev_hand_mask = None
+alpha = 0.3
+alpha_hand = 0.5
 
 # ====== Hauptloop ======
 while True:
@@ -130,35 +130,51 @@ while True:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 hand_points.append([cx, cy])
 
-            # Zeichne mittelgroße Kreise um jeden Landmark (8px = gute Balance)
+            # === STRATEGIE 1: Nur Kreise (natürlicher) ===
+            # Zeichne mittelgroße Kreise um jeden Landmark
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 8, 255, -1)
+                cv2.circle(hand_mask, tuple(point), 10, 255, -1)
 
-            # Erstelle konvexe Hülle um die Hand für zusammenhängende Fläche
-            if len(hand_points) > 0:
-                hand_points = np.array(hand_points)
-                hull = cv2.convexHull(hand_points)
-                cv2.fillConvexPoly(hand_mask, hull, 255)
+            # === STRATEGIE 2: Verbinde benachbarte Punkte mit Linien ===
+            # MediaPipe Hand hat 21 Landmarks in bestimmter Reihenfolge
+            # Verbindungen zwischen benachbarten Fingerknochen
+            connections = [
+                (0, 1), (1, 2), (2, 3), (3, 4),  # Daumen
+                (0, 5), (5, 6), (6, 7), (7, 8),  # Zeigefinger
+                (5, 9), (9, 10), (10, 11), (11, 12),  # Mittelfinger
+                (9, 13), (13, 14), (14, 15), (15, 16),  # Ringfinger
+                (13, 17), (17, 18), (18, 19), (19, 20),  # Kleiner Finger
+                (0, 17)  # Handgelenk zu Handfläche
+            ]
+
+            # Zeichne dicke Linien zwischen verbundenen Punkten
+            for connection in connections:
+                if connection[0] < len(hand_points) and connection[1] < len(hand_points):
+                    pt1 = tuple(hand_points[connection[0]])
+                    pt2 = tuple(hand_points[connection[1]])
+                    cv2.line(hand_mask, pt1, pt2, 255, thickness=18)
 
     # ===== Zeitliche Glättung NUR für die Hand-Maske =====
     if prev_hand_mask is None:
         prev_hand_mask = hand_mask.copy()
     else:
-        # Starke Glättung für Hände = weniger Flackern
         hand_blended = cv2.addWeighted(prev_hand_mask, alpha_hand, hand_mask, 1 - alpha_hand, 0)
         _, hand_blended = cv2.threshold(hand_blended, 127, 255, cv2.THRESH_BINARY)
         prev_hand_mask = hand_blended
         hand_mask = hand_blended
 
-    # Dilatiere Hand-Maske leicht für bessere Sichtbarkeit
+    # Dilatiere und Blur für weichere Kanten
     if np.any(hand_mask > 0):
-        kernel_hand = np.ones((3, 3), np.uint8)
-        hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=2)
+        kernel_hand = np.ones((5, 5), np.uint8)
+        hand_mask = cv2.dilate(hand_mask, kernel_hand, iterations=1)
+        # Blur macht die Kanten weicher/natürlicher
+        hand_mask = cv2.GaussianBlur(hand_mask, (5, 5), 0)
+        _, hand_mask = cv2.threshold(hand_mask, 127, 255, cv2.THRESH_BINARY)
 
-    # Hand-Maske mit KI-Maske kombinieren (BEVOR weitere Operationen)
+    # Hand-Maske mit KI-Maske kombinieren
     ki_mask = cv2.bitwise_or(ki_mask, hand_mask)
 
-    # Bewegungsmaske (optional, derzeit nicht verwendet)
+    # Bewegungsmaske (optional)
     fgmask = fgbg.apply(gray, learningRate=0)
     fgmask = cv2.medianBlur(fgmask, 5)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
@@ -173,7 +189,7 @@ while True:
 
     # Hybrid-Maske bilden
     final_mask = ki_mask.copy()
-    # final_mask = cv2.bitwise_or(final_mask, edges_clean)  # Optional
+    # final_mask = cv2.bitwise_or(final_mask, edges_clean)
 
     kernel_small = np.ones((3, 3), np.uint8)
     final_mask = cv2.morphologyEx(final_mask, cv2.MORPH_CLOSE, kernel_small, iterations=1)
@@ -184,14 +200,10 @@ while True:
     mask_filled = np.zeros_like(final_mask)
 
     if len(contours) > 0:
-        # Sortiere Konturen nach Größe
         contours_sorted = sorted(contours, key=cv2.contourArea, reverse=True)
-
-        # Nimm die größte Kontur (Körper)
         cv2.drawContours(mask_filled, [contours_sorted[0]], -1, 255, thickness=cv2.FILLED)
 
-        # Nimm auch kleinere Konturen (z.B. separate Hände)
-        min_area = 300  # Reduziert für kleinere Hände
+        min_area = 300
         for contour in contours_sorted[1:]:
             if cv2.contourArea(contour) > min_area:
                 cv2.drawContours(mask_filled, [contour], -1, 255, thickness=cv2.FILLED)
