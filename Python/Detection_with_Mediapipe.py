@@ -54,8 +54,8 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
     static_image_mode=False,
     max_num_hands=2,
-    min_detection_confidence=0.6,
-    min_tracking_confidence=0.7  # etwas stabiler
+    min_detection_confidence=0.5, # 0.6
+    min_tracking_confidence=0.6  # 0.7
 )
 
 fgbg = cv2.createBackgroundSubtractorKNN(history=150, dist2Threshold=400, detectShadows=False)
@@ -108,7 +108,7 @@ while True:
     # MediaPipe Person Segmentierung (RGB erwartet)
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
-    ki_mask = (res.segmentation_mask > 0.4).astype(np.uint8) * 255
+    ki_mask = (res.segmentation_mask > 0.35).astype(np.uint8) * 255
 
     # ===== Hände erkennen und in die KI-Maske malen =====
     hand_res = hands.process(rgb)
@@ -122,7 +122,7 @@ while True:
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
-    fgmask = cv2.medianBlur(fgmask, 7)
+    fgmask = cv2.medianBlur(fgmask, 5)
     _, fgmask = cv2.threshold(fgmask, 127, 255, cv2.THRESH_BINARY)
     kernel = np.ones((5, 5), np.uint8)
 

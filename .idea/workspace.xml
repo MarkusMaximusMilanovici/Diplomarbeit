@@ -46,6 +46,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Python.Ascii_Spiegel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Detection_BinaryMask.executor&quot;: &quot;Run&quot;,
     &quot;Python.Detection_with_Mediapipe.executor&quot;: &quot;Run&quot;,
     &quot;Python.ImagetoMatrix.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -93,7 +94,11 @@
       <workItem from="1766395862270" duration="16000" />
       <workItem from="1766746216669" duration="4708000" />
       <workItem from="1767788953316" duration="2916000" />
-      <workItem from="1767856441548" duration="4050000" />
+      <workItem from="1767856441548" duration="6431000" />
+      <workItem from="1769008522161" duration="52000" />
+      <workItem from="1769008652393" duration="61000" />
+      <workItem from="1769452503169" duration="307000" />
+      <workItem from="1769594334815" duration="1469000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -215,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767857713760</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller">
+      <option name="closed" value="true" />
+      <created>1767862895804</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1767862895804</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +262,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1767858371709" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_BinaryMask.coverage" NAME="Detection_BinaryMask Coverage Results" MODIFIED="1769008659046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1769452518453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$ImagetoMatrix.coverage" NAME="ImagetoMatrix Coverage Results" MODIFIED="1766047077488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
   </component>
 </project>
