@@ -154,7 +154,7 @@ while True:
 
             # 2. Zeichne größere Kreise um alle Landmarks
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 8, 255, -1)
+                cv2.circle(hand_mask, tuple(point), 4, 255, -1)
 
             # 3. WICHTIG: Finde Konturen und fülle sie
             # Erstelle temporäre Maske für diese Hand
