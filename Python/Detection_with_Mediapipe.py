@@ -99,7 +99,7 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
 prev_hand_mask = None
-alpha = 0.35  # Etwas mehr Glättung gegen Rauschen
+alpha = 0.30  # Etwas mehr Glättung gegen Rauschen
 alpha_hand = 0.4
 
 # ====== Hauptloop ======
