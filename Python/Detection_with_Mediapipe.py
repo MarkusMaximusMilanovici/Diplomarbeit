@@ -118,7 +118,7 @@ while True:
         for handLms in hand_res.multi_hand_landmarks:
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                cv2.circle(ki_mask, (cx, cy), 2, 255, -1)
+                cv2.circle(ki_mask, (cx, cy), 4, 255, -1)
 
     # Bewegungsmaske (fgmask) und Morphologische Reinigung VOR Canny
     fgmask = fgbg.apply(gray, learningRate=0)
