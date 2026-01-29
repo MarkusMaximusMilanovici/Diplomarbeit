@@ -99,8 +99,8 @@ print("Kalibrierung abgeschlossen! Du kannst jetzt ins Bild.")
 # ====== zeitliche Glättung vorbereiten ======
 prev_mask = None
 prev_hand_mask = None
-alpha = 0.30  # Etwas mehr Glättung gegen Rauschen
-alpha_hand = 0.4
+alpha = 0.25  # Weniger Glättung = weniger Rauschen durch Verschmierung
+alpha_hand = 0.35  # Weniger Glättung für schnellere Hand-Reaktion
 
 # ====== Hauptloop ======
 while True:
@@ -113,7 +113,7 @@ while True:
     # MediaPipe Person Segmentierung
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     res = segmenter.process(rgb)
-    ki_mask = (res.segmentation_mask > 0.35).astype(np.uint8) * 255
+    ki_mask = (res.segmentation_mask > 0.4).astype(np.uint8) * 255  # Höherer Threshold = sauberere Maske
 
     # ===== Hände erkennen =====
     hand_res = hands.process(rgb)
@@ -128,9 +128,9 @@ while True:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 hand_points.append([cx, cy])
 
-            # === NEUE STRATEGIE: Erstelle gefüllte Hand-Polygone ===
+            # === Erstelle realistische Hand-Form ===
 
-            # 1. Zeichne dicke Linien für Finger (als Basis)
+            # 1. Zeichne moderate Linien zwischen Fingerknochen
             connections = [
                 # Daumen
                 (0, 1), (1, 2), (2, 3), (3, 4),
@@ -146,56 +146,46 @@ while True:
                 (5, 9), (9, 13), (13, 17)
             ]
 
-            # Zeichne dickere Linien für zusammenhängende Fläche
+            # Moderate Liniendicke - nicht zu dick!
             for connection in connections:
                 pt1 = tuple(hand_points[connection[0]])
                 pt2 = tuple(hand_points[connection[1]])
-                cv2.line(hand_mask, pt1, pt2, 255, thickness=12)
+                cv2.line(hand_mask, pt1, pt2, 255, thickness=9)  # Reduziert von 12 auf 9
 
-            # 2. Zeichne größere Kreise um alle Landmarks
+            # 2. Moderate Kreise um Gelenke
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 4, 255, -1)
+                cv2.circle(hand_mask, tuple(point), 6, 255, -1)  # Erhöht von 4 auf 6
 
-            # 3. WICHTIG: Finde Konturen und fülle sie
-            # Erstelle temporäre Maske für diese Hand
-            temp_hand = hand_mask.copy()
-            hand_contours, _ = cv2.findContours(temp_hand, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-            # Fülle alle Hand-Konturen
-            for contour in hand_contours:
-                if cv2.contourArea(contour) > 100:  # Ignoriere winzige Artefakte
-                    cv2.drawContours(hand_mask, [contour], -1, 255, thickness=cv2.FILLED)
-
-    # ===== Hand-Maske glätten und vergrößern =====
+    # ===== Hand-Maske verfeinern (WENIGER aggressiv) =====
     if np.any(hand_mask > 0):
-        # Starke Dilatation für zusammenhängende Hand
-        kernel_big = np.ones((7, 7), np.uint8)
-        hand_mask = cv2.dilate(hand_mask, kernel_big, iterations=2)
+        # Moderate Dilatation für zusammenhängende Hand
+        kernel_medium = np.ones((5, 5), np.uint8)  # Reduziert von (7,7) auf (5,5)
+        hand_mask = cv2.dilate(hand_mask, kernel_medium, iterations=1)  # Nur 1 statt 2
 
-        # Starker Blur für organische Form
-        hand_mask = cv2.GaussianBlur(hand_mask, (15, 15), 0)
-        _, hand_mask = cv2.threshold(hand_mask, 100, 255, cv2.THRESH_BINARY)
+        # Moderater Blur für organische Form
+        hand_mask = cv2.GaussianBlur(hand_mask, (9, 9), 0)  # Reduziert von (15,15) auf (9,9)
+        _, hand_mask = cv2.threshold(hand_mask, 120, 255, cv2.THRESH_BINARY)  # Höherer Threshold
 
-        # Erode zurück für realistische Größe
-        kernel_medium = np.ones((5, 5), np.uint8)
-        hand_mask = cv2.erode(hand_mask, kernel_medium, iterations=1)
+        # Leichte Erosion für realistische Größe
+        kernel_small = np.ones((3, 3), np.uint8)  # Reduziert von (5,5) auf (3,3)
+        hand_mask = cv2.erode(hand_mask, kernel_small, iterations=1)
 
     # ===== Zeitliche Glättung für Hand-Maske =====
     if prev_hand_mask is None:
         prev_hand_mask = hand_mask.copy()
     else:
         hand_blended = cv2.addWeighted(prev_hand_mask, alpha_hand, hand_mask, 1 - alpha_hand, 0)
-        _, hand_blended = cv2.threshold(hand_blended, 127, 255, cv2.THRESH_BINARY)
+        _, hand_blended = cv2.threshold(hand_blended, 140, 255, cv2.THRESH_BINARY)  # Höherer Threshold
         prev_hand_mask = hand_blended
         hand_mask = hand_blended
 
     # Hand-Maske mit KI-Maske kombinieren
     ki_mask = cv2.bitwise_or(ki_mask, hand_mask)
 
-    # === Morphologische Operationen gegen Rauschen ===
-    kernel_denoise = np.ones((5, 5), np.uint8)
-    ki_mask = cv2.morphologyEx(ki_mask, cv2.MORPH_CLOSE, kernel_denoise, iterations=2)
-    ki_mask = cv2.morphologyEx(ki_mask, cv2.MORPH_OPEN, kernel_denoise, iterations=1)
+    # === Leichte morphologische Operationen gegen Rauschen ===
+    kernel_denoise = np.ones((3, 3), np.uint8)  # Reduziert von (5,5) auf (3,3)
+    ki_mask = cv2.morphologyEx(ki_mask, cv2.MORPH_CLOSE, kernel_denoise, iterations=1)  # Nur 1 statt 2
+    # KEIN MORPH_OPEN - das erzeugt Rauschen!
 
     # Bewegungsmaske (optional, auskommentiert)
     fgmask = fgbg.apply(gray, learningRate=0)
@@ -203,23 +193,19 @@ while True:
     # Hybrid-Maske
     final_mask = ki_mask.copy()
 
-    # Glättung der Kanten gegen Rauschen
-    final_mask = cv2.GaussianBlur(final_mask, (5, 5), 0)
-    _, final_mask = cv2.threshold(final_mask, 127, 255, cv2.THRESH_BINARY)
+    # === NUR minimale Glättung gegen Rauschen ===
+    # Bilateral Filter behält Kanten besser als Gaussian
+    final_mask = cv2.bilateralFilter(final_mask, 5, 50, 50)
+    _, final_mask = cv2.threshold(final_mask, 140, 255, cv2.THRESH_BINARY)
 
-    # --- Konturen füllen ---
+    # --- Konturen füllen (aber NICHT verbinden) ---
     contours, _ = cv2.findContours(final_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     mask_filled = np.zeros_like(final_mask)
 
     if len(contours) > 0:
-        contours_sorted = sorted(contours, key=cv2.contourArea, reverse=True)
-
-        # Hauptkörper
-        cv2.drawContours(mask_filled, [contours_sorted[0]], -1, 255, thickness=cv2.FILLED)
-
-        # Kleinere Konturen (Hände/Arme)
-        min_area = 150
-        for contour in contours_sorted[1:]:
+        # Fülle ALLE Konturen über Mindestgröße - NICHT nur die größte!
+        min_area = 200
+        for contour in contours:
             if cv2.contourArea(contour) > min_area:
                 cv2.drawContours(mask_filled, [contour], -1, 255, thickness=cv2.FILLED)
 
@@ -230,14 +216,14 @@ while True:
         prev_mask = final_mask.copy()
     else:
         blended = cv2.addWeighted(prev_mask, alpha, final_mask, 1 - alpha, 0)
-        _, blended = cv2.threshold(blended, 127, 255, cv2.THRESH_BINARY)
+        _, blended = cv2.threshold(blended, 150, 255, cv2.THRESH_BINARY)
         prev_mask = blended
         final_mask = blended
 
-    # === Finale Kantenglättung ===
-    # Leichter Blur für weichere Silhouette ohne Rauschen
+    # === Finale sanfte Kantenglättung ===
+    # Sehr leichter Blur nur für Anti-Aliasing
     final_mask = cv2.GaussianBlur(final_mask, (3, 3), 0)
-    _, final_mask = cv2.threshold(final_mask, 200, 255, cv2.THRESH_BINARY)
+    _, final_mask = cv2.threshold(final_mask, 220, 255, cv2.THRESH_BINARY)  # Hoher Threshold für klare Kanten
 
     # Ausgabebild
     out_full = np.zeros_like(frame)
