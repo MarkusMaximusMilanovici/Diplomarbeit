@@ -5,8 +5,7 @@ Aufbau:
 	Matrix
 	Auflösung 48x32cm
 	Camera ( Vermutlich webcam)
-	oder KI gestütztes externes Kamera Modul 
-	https://www.tiktok.com/@cubecatecho/video/7542993951729454366?lang=en-GB
+	oder KI gestütztes externes Kamera Modul
 
 Elektronik
 	Platinen ( Wie groß die Firmen, wie EasyEda, die PLatinen machen können)
