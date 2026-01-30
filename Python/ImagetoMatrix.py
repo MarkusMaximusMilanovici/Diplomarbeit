@@ -11,7 +11,7 @@ if RUN_ON_PI:
     from luma.core.interface.serial import spi, noop
 
     serial = spi(port=0, device=0, gpio=noop())
-    device = max7219(serial, block_orientation=-90, width=32, height=40)
+    device = max7219(serial, block_orientation=90, width=32, height=40)
     device.contrast(10)
 else:
     device = None  # Platzhalter ohne Hardware
