@@ -229,8 +229,8 @@ while True:
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
-    preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
-    cv2.imshow('Hybrid Silhouette (gross)', preview)
+    # preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
+    # cv2.imshow('Hybrid Silhouette (gross)', preview)
 
     # Variante 1: Mit getRectSubPix (einfachster Weg)
     h, w = out_full.shape[:2]
