@@ -23,13 +23,19 @@ def drawImage(frame):
         return
 
     # 2. und 4. 8er-Zeilenblock drehen
+    erste = frame[0:8, :]
     zweite = frame[8:16, :]
+    dritte = frame[16:24, :]
     vierte = frame[24:32, :]
+    funfte =frame[32:40, :]
     sechste = frame[40:48, :]
 
-    frame[8:16, :] = np.rot90(zweite, 2)
-    frame[24:32, :] = np.rot90(vierte, 2)
-    frame[40:48, :] = np.rot90(sechste, 2)
+    frame[0:8, :] = np.rot90(erste, 2)
+    # frame[8:16, :] = np.rot90(zweite, 2)
+    frame[16:24, :] = np.rot90(dritte, 2)
+    # frame[24:32, :] = np.rot90(vierte, 2)
+    frame[32:40, :] = np.rot90(funfte, 2)
+    # frame[40:48, :] = np.rot90(sechste, 2)
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     img = Image.fromarray(gray)
