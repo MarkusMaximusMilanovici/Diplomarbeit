@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller">
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="wieder 2 hände">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Detection_with_Mediapipe.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +97,7 @@
       <workItem from="1769008522161" duration="52000" />
       <workItem from="1769008652393" duration="61000" />
       <workItem from="1769452503169" duration="307000" />
-      <workItem from="1769594334815" duration="1469000" />
+      <workItem from="1769594334815" duration="11021000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -228,7 +227,167 @@
       <option name="project" value="LOCAL" />
       <updated>1767862895804</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="mp_hands um etwas kleiner gemacht">
+      <option name="closed" value="true" />
+      <created>1769609072954</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609072954</updated>
+    </task>
+    <task id="LOCAL-00018" summary="mp_hands um etwas kleiner gemacht">
+      <option name="closed" value="true" />
+      <created>1769609426613</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609426613</updated>
+    </task>
+    <task id="LOCAL-00019" summary="mp_hands um etwas kleiner und größer gemacht">
+      <option name="closed" value="true" />
+      <created>1769609501390</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609501390</updated>
+    </task>
+    <task id="LOCAL-00020" summary="mp_hands um etwas kleiner und größer gemacht">
+      <option name="closed" value="true" />
+      <created>1769609539098</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609539098</updated>
+    </task>
+    <task id="LOCAL-00021" summary="radius der hand kreise größer">
+      <option name="closed" value="true" />
+      <created>1769609635364</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609635364</updated>
+    </task>
+    <task id="LOCAL-00022" summary="alpha größer">
+      <option name="closed" value="true" />
+      <created>1769609776481</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609776481</updated>
+    </task>
+    <task id="LOCAL-00023" summary="alpha noch größer">
+      <option name="closed" value="true" />
+      <created>1769609859876</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1769609859876</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Claude AI benutzt">
+      <option name="closed" value="true" />
+      <created>1769610104412</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1769610104412</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Claude AI benutzt">
+      <option name="closed" value="true" />
+      <created>1769610175098</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1769610175098</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Glättung bei HAnd 0.5, radius 8,mehr dilate bei den Händen iterations 2">
+      <option name="closed" value="true" />
+      <created>1769610864197</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1769610864197</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Glättung bei HAnd 0.4">
+      <option name="closed" value="true" />
+      <created>1769610906709</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1769610906709</updated>
+    </task>
+    <task id="LOCAL-00028" summary="die lienen vom HAndtracking wurden mitaufgenommen also wurden diese entfertn indem nur die punkte angezeigt werden und die linen in den Fingern dicker, gausssian blur hinzugefügt">
+      <option name="closed" value="true" />
+      <created>1769611256117</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1769611256117</updated>
+    </task>
+    <task id="LOCAL-00029" summary="alpha hand 0.4">
+      <option name="closed" value="true" />
+      <created>1769611437374</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1769611437374</updated>
+    </task>
+    <task id="LOCAL-00030" summary="linien auf 8 und radius auf 5 und kernel auf 3,3 genauer, min area = 200 nicht mehr nur drei Finger angezeigt gaussian auf 3,3">
+      <option name="closed" value="true" />
+      <created>1769611744655</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1769611744655</updated>
+    </task>
+    <task id="LOCAL-00031" summary="stärker dilate stärker blur erosion zurück = realistische Größe&#10;morph close morph open">
+      <option name="closed" value="true" />
+      <created>1769612192791</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1769612192791</updated>
+    </task>
+    <task id="LOCAL-00032" summary="radius kleiner">
+      <option name="closed" value="true" />
+      <created>1769612321238</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1769612321238</updated>
+    </task>
+    <task id="LOCAL-00033" summary="radius kleiner alpha 0.3">
+      <option name="closed" value="true" />
+      <created>1769612356494</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1769612356494</updated>
+    </task>
+    <task id="LOCAL-00034" summary="zu gober blur und und zu starker Dilation. Weniger Rauschen höhere seg Threshold werte. weniger tmp glättung">
+      <option name="closed" value="true" />
+      <created>1769672141659</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1769672141659</updated>
+    </task>
+    <task id="LOCAL-00035" summary="4 Hände">
+      <option name="closed" value="true" />
+      <created>1769674312640</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1769674312640</updated>
+    </task>
+    <task id="LOCAL-00036" summary="wieder 2 hände">
+      <option name="closed" value="true" />
+      <created>1769674389722</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1769674389722</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,10 +405,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Init" />
-    <MESSAGE value="mit Picamera anstatt VideoCApture und verwendbar für laptop und Pi" />
-    <MESSAGE value="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen" />
-    <MESSAGE value="Das Bild wird um 90 Grad gedreht weil die KAmera4:3 ist und es wird so downgescaled, dass die Leds von 128x72 Pixel das genau anzeigen und es wird mit voller Auflösung gerechnet und erst am Ende dowgescalet" />
     <MESSAGE value="jetzt wird 32:32 weil das auf die jetztigen Leds abgespielt werden kann" />
     <MESSAGE value="der Output wird auf der MAtrix angezeigt" />
     <MESSAGE value="ein bisschen mit den ZAhlen gespielt Threshold und anstadt Maske Konturen verwendet am Ende, soll das Rauschen etwas wegmachen und die Finhger sollen durch die Zahlen Spielerei und durch das Closing und dilate besser dargestellt werden" />
@@ -258,12 +413,29 @@
     <MESSAGE value="Der KNN Subtractor hat ein umgekehrtes Bild Bekommen anfänglich und dannch wieder umgedreht, jetzt bekommt es ein normales Bild" />
     <MESSAGE value="tracking confidence erhöht von 0.5 auf 0.7 und eine zeitliche Glättung eingefügt wo das letzte Bild mitspielt damit die Hand nicht sofort verschwindet oder wie vorher das sie kurz einfach weggeht" />
     <MESSAGE value="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Helligkeit erhöht damit wenn wie heute schlechtes Licht ist und die Ki bekommt das Bild heller" />
+    <MESSAGE value="mp_hands um etwas kleiner gemacht" />
+    <MESSAGE value="mp_hands um etwas kleiner und größer gemacht" />
+    <MESSAGE value="radius der hand kreise größer" />
+    <MESSAGE value="alpha größer" />
+    <MESSAGE value="alpha noch größer" />
+    <MESSAGE value="Claude AI benutzt" />
+    <MESSAGE value="Glättung bei HAnd 0.5, radius 8,mehr dilate bei den Händen iterations 2" />
+    <MESSAGE value="Glättung bei HAnd 0.4" />
+    <MESSAGE value="die lienen vom HAndtracking wurden mitaufgenommen also wurden diese entfertn indem nur die punkte angezeigt werden und die linen in den Fingern dicker, gausssian blur hinzugefügt" />
+    <MESSAGE value="alpha hand 0.4" />
+    <MESSAGE value="linien auf 8 und radius auf 5 und kernel auf 3,3 genauer, min area = 200 nicht mehr nur drei Finger angezeigt gaussian auf 3,3" />
+    <MESSAGE value="stärker dilate stärker blur erosion zurück = realistische Größe&#10;morph close morph open" />
+    <MESSAGE value="radius kleiner" />
+    <MESSAGE value="radius kleiner alpha 0.3" />
+    <MESSAGE value="zu gober blur und und zu starker Dilation. Weniger Rauschen höhere seg Threshold werte. weniger tmp glättung" />
+    <MESSAGE value="4 Hände" />
+    <MESSAGE value="wieder 2 hände" />
+    <option name="LAST_COMMIT_MESSAGE" value="wieder 2 hände" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Diplomarbeit$Ascii_Spiegel.coverage" NAME="Ascii_Spiegel Coverage Results" MODIFIED="1758723153469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_BinaryMask.coverage" NAME="Detection_BinaryMask Coverage Results" MODIFIED="1769008659046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
-    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1769452518453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
+    <SUITE FILE_PATH="coverage/Diplomarbeit$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1769612456892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
     <SUITE FILE_PATH="coverage/Diplomarbeit$ImagetoMatrix.coverage" NAME="ImagetoMatrix Coverage Results" MODIFIED="1766047077488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python" />
   </component>
 </project>

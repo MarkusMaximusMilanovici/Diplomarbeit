@@ -232,9 +232,9 @@ while True:
     preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
     cv2.imshow('Hybrid Silhouette (gross)', preview)
 
-    # out_small = cv2.resize(out_full, (32, 32), interpolation=cv2.INTER_AREA)
+    out_small = cv2.resize(out_full, (32, 40), interpolation=cv2.INTER_AREA)
     # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
-    # ImagetoMatrix.drawImage(out_small)
+    ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
