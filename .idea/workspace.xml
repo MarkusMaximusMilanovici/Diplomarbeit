@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Matrix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python/Black Mirror.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Python/Black Mirror.txt" afterDir="false" />
-    </list>
+    <list default="true" id="7e6246b0-523d-41fd-889e-74cb30800629" name="Changes" comment="Matrix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +95,7 @@
       <workItem from="1769008522161" duration="52000" />
       <workItem from="1769008652393" duration="61000" />
       <workItem from="1769452503169" duration="307000" />
-      <workItem from="1769594334815" duration="11481000" />
+      <workItem from="1769594334815" duration="11842000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -396,7 +393,39 @@
       <option name="project" value="LOCAL" />
       <updated>1769775372574</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Matrix">
+      <option name="closed" value="true" />
+      <created>1769775704406</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1769775704406</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Matrix">
+      <option name="closed" value="true" />
+      <created>1769775891147</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1769775891147</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Matrix">
+      <option name="closed" value="true" />
+      <created>1769775933007</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1769775933007</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Matrix">
+      <option name="closed" value="true" />
+      <created>1769776009914</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1769776009914</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

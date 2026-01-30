@@ -11,7 +11,7 @@ if RUN_ON_PI:
     from luma.core.interface.serial import spi, noop
 
     serial = spi(port=0, device=0, gpio=noop())
-    device = max7219(serial, block_orientation=-90, width=32, height=40)
+    device = max7219(serial, block_orientation=-90, width=32, height=48)
     device.contrast(10)
 else:
     device = None  # Platzhalter ohne Hardware
@@ -22,14 +22,13 @@ def drawImage(frame):
     if device is None:
         return
 
+    # Bei 40 Zeilen Höhe gibt es 5 Blöcke à 8 Zeilen (0-7, 8-15, 16-23, 24-31, 32-39)
     # 2. und 4. 8er-Zeilenblock drehen
     zweite = frame[8:16, :]
     vierte = frame[24:32, :]
-    sechste = frame[40:48, :]
 
     frame[8:16, :] = np.rot90(zweite, 2)
     frame[24:32, :] = np.rot90(vierte, 2)
-    frame[40:48, :] = np.rot90(sechste, 2)
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     img = Image.fromarray(gray)
