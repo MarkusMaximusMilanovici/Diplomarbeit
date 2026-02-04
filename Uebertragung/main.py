@@ -11,11 +11,11 @@ NUM_MATRICES = COLS * ROWS
 
 SNAKE_LENGTH = 40  # Länge der Schlange in Pixeln
 SNAKE_SPEED = 0.05  # Sekunden zwischen Updates
-BRIGHTNESS = 10
+BRIGHTNESS = 5
 
 # ===== SETUP =====
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=NUM_MATRICES, block_orientation=0)
+device = max7219(serial, cascaded=NUM_MATRICES, block_orientation=90)
 device.contrast(BRIGHTNESS)
 
 
