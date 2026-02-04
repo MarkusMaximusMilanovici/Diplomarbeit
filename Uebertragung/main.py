@@ -33,7 +33,7 @@ def draw_char_rotated(draw, x, y, char):
     """Zeichen 180° gedreht zeichnen (für Zeilen von rechts nach links)"""
     temp_img = Image.new("1", (8, 8))
     temp_draw = ImageDraw.Draw(temp_img)
-    temp_draw.text((2, -1), char, font=pil_font, fill=1)
+    temp_draw.text((2, 0), char, font=pil_font, fill=1)  # Von -1 auf 0 geändert
     temp_img = temp_img.rotate(180)
     draw.bitmap((x, y), temp_img, fill="white")
 
@@ -72,7 +72,7 @@ while True:
                 # Pixel-Position auf dem Gesamt-Display
                 # Jede Matrix ist 8x8 Pixel
                 x_pixel = matrix_num * 8 + 2  # +2 für leichte Zentrierung
-                y_pixel = 0
+                y_pixel = 1  # Von 0 auf 1 geändert für bessere Zentrierung
 
                 # Zeichen zeichnen (normal oder gedreht je nach Zeile)
                 if row % 2 == 0:
