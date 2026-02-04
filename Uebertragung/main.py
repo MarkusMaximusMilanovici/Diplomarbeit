@@ -15,7 +15,7 @@ BRIGHTNESS = 10
 
 # ===== SETUP =====
 serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial, cascaded=NUM_MATRICES, block_orientation=-90)
+device = max7219(serial, cascaded=NUM_MATRICES, block_orientation=0)
 device.contrast(BRIGHTNESS)
 
 
