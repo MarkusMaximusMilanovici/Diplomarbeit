@@ -6,7 +6,7 @@ from luma.core.render import canvas
 
 # ===== KONFIGURATION =====
 COLS = 16  # Anzahl Matrizen pro Zeile (horizontal)
-ROWS = 3  # Anzahl Zeilen (vertikal)
+ROWS = 4  # Anzahl Zeilen (vertikal)
 NUM_MATRICES = COLS * ROWS
 
 SNAKE_LENGTH = 40  # Länge der Schlange in Pixeln
