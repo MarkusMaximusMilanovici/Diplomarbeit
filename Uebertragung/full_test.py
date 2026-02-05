@@ -5,13 +5,13 @@ from luma.core.render import canvas
 
 # ===== KONFIGURATION =====
 COLS = 16  # Anzahl Matrizen pro Zeile (horizontal)
-ROWS = 4  # Anzahl Zeilen (vertikal)
+ROWS = 5  # Anzahl Zeilen (vertikal)
 NUM_MATRICES = COLS * ROWS
 
 BRIGHTNESS = 5
 
 # ===== SETUP =====
-serial = spi(port=0, device=0, gpio=noop())
+serial = spi(port=0, device=0, gpio=noop(), max_speed_hz=1000000)
 device = max7219(serial, cascaded=NUM_MATRICES, block_orientation=-90)
 device.contrast(BRIGHTNESS)
 
