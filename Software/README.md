@@ -1,0 +1,1 @@
+## Strukturierender Aufbau unserers Software teils der Diplomarbeit
