@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import mediapipe as mp
-import ImagetoMatrix
+import Software.LED_Matrix.ImagetoMatrix as ImagetoMatrix
 
 # ============================================================
 # Kamera-Auswahl: Raspberry Pi (PiCamera2) ODER Laptop (cv2.VideoCapture)
