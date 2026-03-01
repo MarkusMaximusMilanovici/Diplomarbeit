@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="902067fb-bda8-41fc-98d2-065a22470240" name="Changes" comment="Vor dem Canny ein Errode und dilate, weil einfacher für canny, dann canny, dannch nochmal ein opening und closing für edge map sauberer machen">
+      <change afterPath="$PROJECT_DIR$/Detection_with_bodypix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Detection_BinaryMask.py" beforeDir="false" afterPath="$PROJECT_DIR$/Detection_BinaryMask.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MarkusMaximusMilanovici&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MarkusMaximusMilanovici/Diplomarbeit.git&quot;,
+    &quot;accountId&quot;: &quot;c9e15b52-1e20-4fee-871b-28daf44d39db&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="33moZGRlHMX0EOyadp8QfsWKNyv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Detection.executor&quot;: &quot;Run&quot;,
+    &quot;Python.DetectionV2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Detection_BinaryMask.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Detection_with_AI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Detection_with_Mediapipe.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Detection_with_bodypix.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/rober/Documents/Diplomarbeit/Python&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\rober\Documents\Diplomarbeit\Python" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rober\Documents\Diplomarbeit\Python" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.220" />
+        <option value="bundled-python-sdk-0fc6c617c4bd-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.220" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="902067fb-bda8-41fc-98d2-065a22470240" name="Changes" comment="" />
+      <created>1759931661832</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759931661832</updated>
+      <workItem from="1759931662900" duration="841000" />
+      <workItem from="1759990339529" duration="6403000" />
+      <workItem from="1760528622531" duration="1043000" />
+      <workItem from="1760530511806" duration="5594000" />
+      <workItem from="1760594885135" duration="6415000" />
+      <workItem from="1760612952728" duration="1522000" />
+      <workItem from="1761138132923" duration="5188000" />
+      <workItem from="1761198662238" duration="5750000" />
+      <workItem from="1762346917730" duration="4411000" />
+      <workItem from="1763019715577" duration="7455000" />
+      <workItem from="1763555755186" duration="17564000" />
+      <workItem from="1763639440351" duration="3644000" />
+      <workItem from="1764081014673" duration="2357000" />
+      <workItem from="1764150676213" duration="3804000" />
+      <workItem from="1764159539720" duration="9914000" />
+      <workItem from="1764232231964" duration="1675000" />
+      <workItem from="1764532238638" duration="192000" />
+    </task>
+    <task id="LOCAL-00073" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762347429983</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1762347429983</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762347616837</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1762347616837</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762348955034</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1762348955034</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762349050862</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1762349050862</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762349097700</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1762349097700</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1762349183548</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1762349183548</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763020772967</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1763020772967</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763022441223</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1763022441223</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763022695397</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1763022695397</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763023446377</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023446377</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763023497216</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023497216</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763023544543</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023544543</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763023872250</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023872250</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763024052141</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1763024052141</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763024220536</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1763024220536</updated>
+    </task>
+    <task id="LOCAL-00088" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763024350311</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1763024350311</updated>
+    </task>
+    <task id="LOCAL-00089" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763024735404</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1763024735404</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763024751336</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1763024751336</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763027045867</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1763027045867</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763028557306</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1763028557306</updated>
+    </task>
+    <task id="LOCAL-00093" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763556889577</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1763556889577</updated>
+    </task>
+    <task id="LOCAL-00094" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763557447110</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1763557447110</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763557534437</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1763557534437</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763557963510</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1763557963510</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763558943377</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1763558943377</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763558999842</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1763558999842</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763559187643</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1763559187643</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763559706918</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1763559706918</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763559943614</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1763559943614</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763560797592</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1763560797592</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763561760701</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1763561760701</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763561848801</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1763561848801</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763561986123</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1763561986123</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763562018603</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1763562018603</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763562456003</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1763562456003</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763564009566</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1763564009566</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763564806877</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1763564806877</updated>
+    </task>
+    <task id="LOCAL-00110" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763566301344</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1763566301344</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763624343033</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1763624343033</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Test File for Detection">
+      <option name="closed" value="true" />
+      <created>1763634087132</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1763634087132</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Das gleiche nur mit filter hinterher für mehr detail und pixelentfernung">
+      <option name="closed" value="true" />
+      <created>1763753222286</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1763753222286</updated>
+    </task>
+    <task id="LOCAL-00114" summary="Das gleiche nur mit filter hinterher für mehr detail und pixelentfernung">
+      <option name="closed" value="true" />
+      <created>1763753523863</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1763753523863</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Vor dem Knn BAckground Subtractor eine Kalibrierung mit 100 Bilder um zu schauen welche Pixel sich wie ändern und den HIntergrund mit der Person besser zu trennen">
+      <option name="closed" value="true" />
+      <created>1764161624375</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1764161624375</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Errode und Dilate nach dem Canny mit 5x5">
+      <option name="closed" value="true" />
+      <created>1764164526625</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1764164526625</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Errode und Dilate nach dem Canny mit 5x5 2 mal ausführen">
+      <option name="closed" value="true" />
+      <created>1764164563501</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1764164563506</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Errode und Dilate nach dem Canny mit 5x5 vor und nach dem Canny ausführen">
+      <option name="closed" value="true" />
+      <created>1764165760216</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1764165760216</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Errode und Dilate nach dem Canny mit 5x5 vor und nach dem Canny ausführen. ISt schlechter weil das errode und Dilate anfänglich auf Graustufenbild. dannch auf binär(schwarz weiß)">
+      <option name="closed" value="true" />
+      <created>1764165901833</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1764165901833</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Vor dem Canny ein Errode und dilate, weil einfacher für canny, dann canny, dannch nochmal ein opening und closing für edge map sauberer machen">
+      <option name="closed" value="true" />
+      <created>1764168058217</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1764168058217</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Vor dem Canny ein Errode und dilate, weil einfacher für canny, dann canny, dannch nochmal ein opening und closing für edge map sauberer machen">
+      <option name="closed" value="true" />
+      <created>1764238151766</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1764238151766</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="Test File for Detection" />
+    <MESSAGE value="Das gleiche nur mit filter hinterher für mehr detail und pixelentfernung" />
+    <MESSAGE value="Vor dem Knn BAckground Subtractor eine Kalibrierung mit 100 Bilder um zu schauen welche Pixel sich wie ändern und den HIntergrund mit der Person besser zu trennen" />
+    <MESSAGE value="Errode und Dilate nach dem Canny mit 5x5" />
+    <MESSAGE value="Errode und Dilate nach dem Canny mit 5x5 2 mal ausführen" />
+    <MESSAGE value="Errode und Dilate nach dem Canny mit 5x5 vor und nach dem Canny ausführen" />
+    <MESSAGE value="Errode und Dilate nach dem Canny mit 5x5 vor und nach dem Canny ausführen. ISt schlechter weil das errode und Dilate anfänglich auf Graustufenbild. dannch auf binär(schwarz weiß)" />
+    <MESSAGE value="Vor dem Canny ein Errode und dilate, weil einfacher für canny, dann canny, dannch nochmal ein opening und closing für edge map sauberer machen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vor dem Canny ein Errode und dilate, weil einfacher für canny, dann canny, dannch nochmal ein opening und closing für edge map sauberer machen" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Python$Detection.coverage" NAME="Detection Coverage Results" MODIFIED="1763565317789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$Detection_with_AI.coverage" NAME="Detection_with_AI Coverage Results" MODIFIED="1763753236341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$DetectionV2.coverage" NAME="DetectionV2 Coverage Results" MODIFIED="1764081461437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$Detection_BinaryMask.coverage" NAME="Detection_BinaryMask Coverage Results" MODIFIED="1764162926616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$main.coverage" NAME="main Coverage Results" MODIFIED="1760534920211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$Detection_with_bodypix.coverage" NAME="Detection_with_bodypix Coverage Results" MODIFIED="1763754329668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Python$Detection_with_Mediapipe.coverage" NAME="Detection_with_Mediapipe Coverage Results" MODIFIED="1764232280389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
