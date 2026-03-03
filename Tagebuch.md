@@ -1,42 +1,194 @@
-# 5BHEL_Greinix_Milanovici_Black_Mirror
+# Projektfortschritt – Black Mirror
 
-# Projekttagebuch
+## 1️⃣ LED-Matrix & Hardware
+
+### September 2025
+**24.09.2025**
+- Entscheidung für Raspberry Pi statt Nucleo Board
+- Bauteilrecherche (LED-Module, Kamera, Raspberry Pi)
+
+### Oktober 2025
+**01.10.2025**
+- LEDs bestellt (günstigere Alternative gefunden)
+
+**08.10.2025**
+- Funktionsprüfung der Bauteile
+- Raspberry OS auf USB installiert
+- Fehlende Komponenten identifiziert (Netzteil 5V 5A, HDMI Adapter, Kühlung)
+
+**09.10.2025**
+- Analyse der LED-Module für Anschlussmechanismus
 
 
+### November 2025
+**05.11.2025**
+- LED-Module getestet
+- Defekte LEDs repariert
 
-| Datum | Inhalt |     |     |     |     |
-|-------|--------|-----|-----|-----|-----|
-| 2025-09-17 | - [ ] Entscheidung des Finalen Diplomarbeitsthemas und leichte Recherche |     |     |     |     |
-| 2025-09-18 | - [ ] Exkursion TU GRAZ  |     |     |     |     |
-| 2025-09-24 | - [ ] Anlegung und Einrichtung des Githubs(Tasks, Zeitpläne, Aufteilung, Dokumentation) (Greinix) <br> - [ ] Verwaltung des Githubs(Greinix) <br> - [ ] Entschieden für Raspberry pi anstatt Nucleo Board (Milanovici) <br> - [ ] Bauteilrecherche(LEDs, Kamera, Raspberry pi) (Milanovici) |     |     |     |     |
-| 2025-09-25 | - [ ] Projekttagebuch erstellt (Greinix) <br> - [ ] ABA-Portal Anmeldung und Ausfüllung (Milanovici) <br> - [ ] Überlegen der ungefähren Arbeitsaufteilung  <br> - [ ] Essentielle Bauteile(Raspberry pi , Kamera und Zubehör) |     |     |     |     |
-| 2025-10-01 | - [ ] Planung und Design für das Case Angefangen (Greinix)  <br> - [ ] Zeichnung des ersten Grunddesigns (Milanovici, Greinix) <br> - [ ] Probieren mit Ausgeborgten Raspberry von Ing.Scherr aus der Werkstatt (Milanovici) <br> - [ ] Github erweitert (Greinix) <br> - [ ] LEDs wurden durch um Entscheidung des Produkts erst an diesem Tag bestellt (Günstigere Alternative Gefunden) (Milanovici) <br> - [ ] Weißen Redbull gekauft (unbekannt) |     |     |     |     |
-| 2025-10-08 | - [ ] Funktionsfähigkeit der Bauteile getestet <br> - [ ] Raspberry Os auf einem USB heruntergeladen <br> - [ ] Probleme erkannt( Ein Netzteil mit 5V 5A, ein HDMI Micro auf HDMI Kabel und eine Kühlkörper fehlen) <br> - [ ] Pycharm mit Github verbunden und mit dem Raspberry Pi  <br> - [ ] Ersten Prototypen des Cases in Fusion Designen angefangen <br> - [ ] Dokumentieren der Pros Contras und der Probleme des Designs |     |     |     |     |
-| 2025-10-09 | - [ ] Camera Modul testen <br> - [ ] Prroblem gelöst ( Anfänglich Kamera nicht erkannt und fehlende Packages heruntergeladen) <br> - [ ] Design wurde weiter entwickelt jedoch Schwerwiegende Probleme konnten aber noch nicht gelöst werden  <br> - [ ] Analysiere der LED Bauteile für Mechanismus des Anschließens |     |     |     |     |
-| 2025-10-15 | - [ ] Erste Ansätze des Erkennungscodes geschrieben <br> - [ ] Verschiedenste Libraries für Erkennung von z.B: Gesicht und Körper getestet  <br> - [ ] Material und Aufbau des Cases beredet und geplant zu verändern ( 3D zu groß, Verbinden der LED Matrizen untereinander) <br> - [ ] Raspberry pi case zusammengebaut <br> - [ ] Probleme Lösungsansätze und Ideen dokumentiert  |     |     |     |     |
-| 2025-10-16 | - [ ] Beim Design weitergemacht <br> - [ ] Eine neues Algorithmus für die Personenerfassung getestet (Errode Dilate)  <br> - [ ] Problem erkannt ( die Camera nahm den Hintergrund auf, weil die Camera nicht fest war und ein wenig Delay aber nicht so schlimm) |     |     |     |     |
-| 2025-11-05 | - [ ] Leds getestet und die fehlerhaften versucht zu reparieren <br> - [ ] Mit der Diplomarbeit angefangen |     |     |     |     |
-| 2025-11-06 |        |     |     |     |     |
-| 2025-11-12 | - [ ] An der Diplomarbeit weitergeschrieben |     |     |     |     |
-| 2025-11-13 | - [ ] Am Code für die Personen Erkennung weiter gearbeitet ( probiert die beste Sihlouette anzuzeigen, falls sich nichts bewegt für einige Zeit) <br> - [ ] Das Errode und Dilate besser gemacht ( Die Konturen sind Detalierter und weniger Delay als vorher) |     |     |     |     |
-| 2025-11-19 | - [ ] Mit dem Code weitergemacht ( Versucht ein MIttelweg zu finden zwischen Bewegungs und Edge Detection) <br> - [ ] Problem mit Bewegungserkennung ( Anfänglich das Fenster in verschiedenen Bereichen geteilt und versucht sobald was im Bereich kommt es gleich zu speichern) <br> - [ ] Probiert mit einem Ascii zu realisieren ( sozusagen alles außerhalb mit nur Nullen und den Rest mit eines aber probleme) <br> - [ ] Mit KI probiert ( mit Ki funktioniert es da wir den Geist effekt verlieren und doch noch eine scharfe Sihlouette zu haben) <br> - [ ] Eigener Branch für den BildÜbertragungscode gemacht  <br> - [ ] Ersten Python Code zum Ansteuern einer LED-Matrix geschrieben <br> - [ ] Python Package für LED-Matrix installiert und damit ein wenig rumprobiert  |     |     |     |     |
-| 2025-11-20 | - [ ] Einen Clahe Filter eingefügt ( Mehr Kontrast) <br> - [ ] Clahe entfernt da die KI ein RGB bild erwartet ( Gamma-Korrektur, muss aber noch verstehen wie genau das funktioniert) <br> - [ ] 4x LED MAtrix Module zusammengelötet <br> - [ ] Neue Branch auf Github für Video übertragung wurde in Github erstellt  <br> - [ ] Der Erste Code zum Ansteuern der LED-Matrix wurde angefangen und getestet |     |     |     |     |
-| 2025-11-26 | - [ ] Kalibrierung hinzugefügt ( Knn Subtractor 100 Bilder geben, um den Hintergrund zu lernen) <br> - [ ] Das Canny und das Errode und Dilate etwas verändert ( 5x5, mehrmals Errode und dilate) <br> - [ ] Canny und Errode und Dilate richtig oft und richtige Reihnfolge einsetzten und verwenden <br> - [ ] Das Beste Ergebnis zuerst grayscalen dann Errode und Dilate dann Canny dann opening und closing <br> - [ ] Code zum Ansteuern der LEDs wurde vergrößert <br> - [ ] Es wurde zum ersten mal ein Bild auf 4 4er LED Blöcken abgebildet |     |     |     |     |
-| 2025-12-03 | - [ ] Überlegung für die Leds mit dem Case <br> - [ ] Das Virtuell enviroment testen auf mediapipe <br> - [ ] Das Virtuell enviroment nochmal löschen, weil das git probleme mit dem enviroment hatte <br> - [ ] eine Lösung für Video.Capture mit dem Raspberry finden <br> - [ ] Es muss das OS gedowngraded werden und Python 3.11 muss heruntergeladen werden für die library von PiCamera  <br> - [ ] Code zum Anzeigen von Videos auf der Test-LED-Matrix wurde probiert <br> - [ ] Code zum downscailing von videos und Bildern wurde hinzugefügt <br> - [ ] Video wurde auf LED Matrix Angezeigt |     |     |     |     |
-| 2025-12-04 | - [ ] Das OS wurde gedowngraded auf Debian Bookworm 64 <br> - [ ] die ganzen librarys werden runtergeladen und die verbindung mit GIthub <br> - [ ] erstmals die Probleme mit dem Mediapipe und der PiCamera gelöst weil das virtual enviroment falsch installiert wurde und die ganzen packages müssen global gespeichert werden <br> - [ ] Der Output wird so gescalet, dass es den zukünftigen Led Matrizen entspricht. die KAmera wird um 90° gedreht, weil die Kamera 4:3 ist und auf 72x128 Pixel gescalet.  <br> - [ ] Dannach auf 32x32 Pixel gescalet für die jetzigen 4 Module <br> - [ ] Github-Link: <https://github.com/MarkusMaximusMilanovici/Diplomarbeit> <br> - [ ] Erste Aufnahme von der Kamera wurde auf der LED-Matrix angezeigt  |     |     |     |     |
-| 2025-12-10 | - [ ] Blueprint für Aufbau der LED Matrix mit Lösungswegen Gezeichnet |     |     |     |     |
-| 2025-12-17 | - [ ] Das BAuteil für die Verbindung der Led Matrizen besorgt und ausprobiert <br> - [ ] Verschiedene Verbindungsmöglichkeiten für Led durchgedacht und eine Lösung gefunden |     |     |     |     |
-| 2025-12-18 | - [ ] Die nötigen Version und packages für den Laptop heruntergeladen  <br> - [ ] Beim Code für die Personenerkennung mit den Werten herumgespielt <br> - [ ] die bisherigen errungenschaften zusammengeschrieben |     |     |     |     |
-| 2026-01-07 | - [ ] Die 90Grad gebogenen Pins abgelötet <br> - [ ] Bei der Personenerfassung Hand tracking hinzugefügt von mediapipe und um die punkte kleine kreise darstellen <br> - [ ] eine zeitliche Glättung hinzugefügt damit das Problem das die Finger und die HAnd verschwinden nicht mehr vorkommt <br> - [ ] Der KNN Subtractor bekam vorher ein umgedrehtes Bild weswegen der Hintergrund manchmal gespinnt hat. |     |     |     |     |
-| 2026-01-14 | - [ ] Die Pin Header auf den Platinen gelötet <br> - [ ] Die Pin Header müssen zurecht geschnitten werden und auf jedem Modul müssen zwei mal 5 Pin Header gelötet <br> - [ ] Viel Lötstellen sind zugelötet durch das Ablöten der Stiftleisten |     |     |     |     |
-| 2026-01-15 | - [ ] Die restlichen Pin Header wurden gelötet <br> - [ ] Die Platine für die Verbindungen zwischen zwei Enden wurde entworfen und bestellt |     |     |     |     |
-| 2026-01-28 | - [ ] Die Stiftleisten an die Platinen angelötet angelötet <br> - [ ] Das Problem mit dem verschwinden der Hand bei der Personenerkennung teilweise gelöst <br> - [ ] jetzt werden die Punkte auch mit linien verbunden die auch weiß gezeigt werden <br> - [ ] Die HAnd sieht somit von der Weite etwas dicker <br> - [ ] Mittlere Entfernung sieht die Hand gut aus <br> - [ ] und aus sehr naher entfernung verschwindet die Hand, weil die Ki erkennt die HAnd nicht mehr und es werden nur noch die Linien angezeigt <br> - [ ] Arm und Körper werden, wenn die zu nahe aneinander sind, weiß dargestellt.  |     |     |     |     |
-| 2026-01-29 | - [ ] Der Arm und der Körper werden getrennt aber mehr Rauschen  <br> - [ ] Wenn zwei Personen im Bild sind werden diese zwar erkannt aber es werden nur maximal zwei Hände erkannt. <br> - [ ] wenn man als Beispiel 4 Hände max einstellt, rauscht es zu viel |     |     |     |     |
-| 2026-01-04 | - [ ] Die LEDs werden getestet verbunden mit den neunen Bauteilen  <br> - [ ] gemerkt dass die U shape Pins zu kurz für die Steckleisten waren <br> - [ ] Von jedem LED Modul muss die Hälfte der Pin Header abgeschnitten werden <br> - [ ] Alle LEDS miteinander verbunden <br> - [ ] Der Pi schafft alleine drei Reihen |     |     |     |     |
-| 2026-01-05 | - [ ] Mit dem Netzteil gehen sich nur 4 Reihen aus ab der 5ten Reihe geht alles aus <br> - [ ] Die Helligkeit verringert sich pro Reihe  <br> - [ ] Eine Lösung wäre ein Level Shifter nach dem Pi um die 3.3 V Signale auf 5V umzuwandeln <br> - [ ] Und nach 3 oder 4 Reihen einen Signal Repeater einbauen damit das Signal regeneriert wird <br> - [ ] da die Helligkeit sich verringert muss Spannung in jeder Reihe eingespeist werden |     |     |     |     |
-| 2026-02-11 | - [ ] Clk mit dem Oszi angeschaut und Data In <br> - [ ] 2 Reihen die Spannung eingespeist ( Helligkeit gelöst) <br> - [ ] Der OSzi zeigt das Signal von CLk sieht schon nach dem zweiten Modul verzerrt aus <br> - [ ] Plan ausgemacht um die Module wieder abzulöten und ungeschnittene Header anlöten  <br> - [ ] Eine Platine Designen für die Verbindung zwischen den Modulen <br> - [ ] An Enden der Reihen eine Platine mit einem Schmidd Trigger ein Buffer und ein 30 Ohm designen <br> - [ ] einen Level Shifter am Anfang für die 5V die die Module erwarten <br> - [ ] oder die Clk chip select und die Spannung alle individuel anschließen an jede Reihe und mit den 3 Spi Pins, also 9 Reihen |     |     |     |     |
-| 2026-02-12 | Die Clk wurde jetzt in jeder Reihe jeweils eingespeist sowie Chip select und Vcc. also nur Data in geht seriel durch die ModuleEs gehen 4 Reihen flüssig ab der fünften wird die Clk schon viel zu schlecht Platine für die Verbindungen zwischen den Modulen verwendetIdee wäre SPI0 und SPI1 zu verwenden für jeweils 4 Reihen verwenden da die SPIs jeweils MOSI und CLK Pins besitzenErste 3 Reihen mit SPI0 und nächsten 3 mit SPI1 hat nicht funktioniert. es wird vermutet das der SPI1 garnicht funktioniert weil CHip select clk und MOsi nix schicken |     |     |     |     |
-| 2026-02-25 | Das Github wurde komplett aufgeräumt und das Inhaltsverzeichnis sowie die ersten Titel der Diplomarbeit wurden erledigt |     |     |     |     |
-| 2026-02-26 | Die Signal Verstärker Schaltung wurde mit einem OPV statt einem Schmitt Trigger designedProbleme gehabt mit dem Hinzufügen von Bauteilen in Multisim sowie in Lt Spice, da entweder die Library für diese Programe und diesesbestimmte Bauteil nicht vorhanden waren oder weil die Multisim version zu alt war.an der Diplomarbeit wurde weiter gearbeitetDie Schaltung wurde gefertigt, der OPA354 wurde ausgewählt und wird bestellt sobald gemessen wird mit einem Oszi ob das Data In Signal auch verwaschen wird(morgen) |     |     |     |     |
-|       |        |     |     |     |     |
-|       |        |     |     |     |     |
+**19.11.2025**
+- Erster Python-Code zur Ansteuerung einer LED-Matrix
+- Installation eines LED-Matrix-Python-Packages
+
+**20.11.2025**
+- 4 LED-Matrix-Module zusammengelötet
+- Ansteuerungscode weiterentwickelt
+
+**26.11.2025**
+- Erstmalige Anzeige eines Bildes auf 4 LED-Modulen
+
+
+### Dezember 2025
+**03.12.2025**
+- Downscaling von Videos implementiert
+- Video erfolgreich auf LED-Matrix dargestellt
+
+**04.12.2025**
+- OS auf Debian Bookworm 64 downgraded
+- Bibliotheken global installiert
+- Kamera um 90° gedreht
+- Skalierung auf 72x128 Pixel geplant
+- Skalierung auf 32x32 Pixel für Testmodule umgesetzt
+- Erste Live-Kameraanzeige auf LED-Matrix
+
+**10.12.2025**
+- Blueprint für LED-Matrix-Aufbau gezeichnet
+
+**17.12.2025**
+- Verbindungslösung für LED-Module entwickelt
+
+
+### Januar 2026
+**04.01.2026**
+- Alle LED-Module verbunden
+- Raspberry Pi schafft 3 Reihen stabil
+
+**05.01.2026**
+- Netzteil reicht nur für 4 Reihen
+- Helligkeit nimmt pro Reihe ab
+- Lösungsideen:
+  - Level-Shifter (3.3V → 5V)
+  - Signal-Repeater
+  - Separate Spannungseinspeisung pro Reihe
+
+**14.–15.01.2026**
+- Pin-Header gelötet
+- Verbindungsplatine entworfen und bestellt
+
+**28.–29.01.2026**
+- Handdarstellung auf LED verbessert
+- Problem: Rauschen bei mehreren Personen
+- Maximal zwei Hände stabil erkennbar
+
+
+### Februar 2026
+**11.02.2026**
+- Signal (CLK & Data In) mit Oszilloskop analysiert
+- Signalverzerrung ab zweitem Modul festgestellt
+- Planung einer Signalverstärker-Schaltung
+- Design mit Schmitt-Trigger / Buffer / 30 Ohm Widerstand
+- Level-Shifter als Lösung eingeplant
+
+**12.02.2026**
+- CLK, Chip Select und Vcc pro Reihe eingespeist
+- 4 Reihen stabil, ab 5. Reihe instabil
+- SPI0 und SPI1 getestet → nicht erfolgreich
+
+**26.02.2026**
+- Signalverstärker-Schaltung mit OPV (OPA354) entworfen
+- Simulation in Multisim / LTSpice
+- OPV bestellt
+
+
+## 2️⃣ Personenerfassung & Bildverarbeitung
+
+### Oktober 2025
+**15.10.2025**
+- Erste Ansätze des Erkennungscodes
+- Verschiedene Libraries getestet
+
+**16.10.2025**
+- Erode & Dilate getestet
+- Problem: Hintergrund wird teilweise erkannt
+
+
+### November 2025
+**13.11.2025**
+- Silhouette verbessert
+- Erode/Dilate optimiert (weniger Delay, detailliertere Konturen)
+
+**19.11.2025**
+- Kombination aus Bewegungs- und Edge-Detection getestet
+- ASCII-Ansatz getestet (verworfen)
+- KI-Ansatz getestet → bessere Silhouette
+
+**20.11.2025**
+- CLAHE-Filter eingefügt (Kontrast)
+- Entfernt, da KI RGB benötigt
+
+**26.11.2025**
+- KNN-Subtractor mit 100 Frames Kalibrierung
+- Beste Pipeline gefunden:
+  - Grayscale
+  - Erode & Dilate
+  - Canny
+  - Opening & Closing
+
+
+### Dezember 2025
+**03.–04.12.2025**
+- MediaPipe mit Raspberry eingerichtet
+- Virtual Environment Probleme gelöst
+- PiCamera & MediaPipe kompatibel gemacht
+
+**18.12.2025**
+- Parameteroptimierung für Personenerkennung
+
+
+### Januar 2026
+**07.01.2026**
+- Hand-Tracking (MediaPipe Hands) integriert
+- Landmarkpunkte als Kreise dargestellt
+- Zeitliche Glättung implementiert
+- KNN-Bug (gedrehtes Bild) behoben
+
+**28.01.2026**
+- Landmarkpunkte mit Linien verbunden
+- Handdarstellung verbessert
+
+**29.01.2026**
+- Arm/Körper-Trennung verbessert
+- Rauschen erhöht bei mehreren Händen
+
+
+## 3️⃣ Software & Systemintegration
+
+### September 2025
+- GitHub eingerichtet
+- Projekttagebuch erstellt
+
+### November 2025
+- Branch für Bildübertragung erstellt
+- Branch für Videoübertragung erstellt
+
+### Dezember 2025
+- OS-Downgrade für Library-Kompatibilität
+- Globale Installation der Libraries
+- Downscaling-Strategie implementiert
+
+### Februar 2026
+- GitHub komplett aufgeräumt
+- Struktur der Diplomarbeit vorbereitet
+
+
+## 4️⃣ Diplomarbeit
+
+### November 2025
+- Beginn der schriftlichen Arbeit
+
+### Dezember 2025
+- Dokumentation der bisherigen Fortschritte
+
+### Februar 2026
+- Inhaltsverzeichnis fertiggestellt
+- Erste Kapitel strukturiert
+- Technische Abschnitte begonnen
