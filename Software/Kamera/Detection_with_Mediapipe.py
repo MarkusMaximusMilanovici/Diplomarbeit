@@ -249,10 +249,10 @@ while True:
         crop_h = int(w / aspect)
 
     cropped = cv2.getRectSubPix(out_full, (crop_w, crop_h), (w // 2, h // 2))
-    # out_small = cv2.resize(cropped, (32, 48), interpolation=cv2.INTER_AREA)
+    out_small = cv2.resize(cropped, (32, 48), interpolation=cv2.INTER_AREA)
 
-    # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
-    ImagetoMatrix.drawImage(preview)
+    cv2.imshow('Hybrid Silhouette (32x32)', out_small)
+    ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
