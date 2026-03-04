@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import mediapipe as mp
-#import ImagetoMatrix
+import Software.LED_Matrix.ImagetoMatrix as ImagetoMatrix
 
 # ============================================================
 # Kamera-Auswahl: Raspberry Pi (PiCamera2) ODER Laptop (cv2.VideoCapture)
@@ -251,8 +251,8 @@ while True:
     cropped = cv2.getRectSubPix(out_full, (crop_w, crop_h), (w // 2, h // 2))
     out_small = cv2.resize(cropped, (32, 48), interpolation=cv2.INTER_AREA)
 
-    # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
-    #ImagetoMatrix.drawImage(out_small)
+    cv2.imshow('Hybrid Silhouette (32x32)', out_small)
+    ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
