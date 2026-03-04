@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import mediapipe as mp
-import ImagetoMatrix
+#import ImagetoMatrix
 
 # ============================================================
 # Kamera-Auswahl: Raspberry Pi (PiCamera2) ODER Laptop (cv2.VideoCapture)
@@ -130,31 +130,37 @@ while True:
 
             # === Erstelle realistische Hand-Form ===
 
-            # 1. Zeichne moderate Linien zwischen Fingerknochen
+            # 1. Fülle die Handfläche als Polygon, um Löcher (Skelett-Look) zu vermeiden
+            palm_indices = [0, 1, 5, 9, 13, 17]
+            palm_pts = np.array([hand_points[i] for i in palm_indices], dtype=np.int32)
+            cv2.fillPoly(hand_mask, [palm_pts], 255)
+
+            # 2. Verbindungen der Finger und Handkanten
             connections = [
+                # Handfläche (Umrandung für weiche Kanten)
+                (0, 1), (1, 5), (5, 9), (9, 13), (13, 17), (17, 0),
                 # Daumen
-                (0, 1), (1, 2), (2, 3), (3, 4),
+                (1, 2), (2, 3), (3, 4),
                 # Zeigefinger
-                (0, 5), (5, 6), (6, 7), (7, 8),
+                (5, 6), (6, 7), (7, 8),
                 # Mittelfinger
-                (0, 9), (9, 10), (10, 11), (11, 12),
+                (9, 10), (10, 11), (11, 12),
                 # Ringfinger
-                (0, 13), (13, 14), (14, 15), (15, 16),
+                (13, 14), (14, 15), (15, 16),
                 # Kleiner Finger
-                (0, 17), (17, 18), (18, 19), (19, 20),
-                # Handfläche
-                (5, 9), (9, 13), (13, 17)
+                (17, 18), (18, 19), (19, 20)
             ]
 
-            # Moderate Liniendicke - nicht zu dick!
+            # Etwas dickere Linien für Finger, damit sie natürlich wirken
+            finger_thickness = 18 
             for connection in connections:
                 pt1 = tuple(hand_points[connection[0]])
                 pt2 = tuple(hand_points[connection[1]])
-                cv2.line(hand_mask, pt1, pt2, 255, thickness=9)  # Reduziert von 12 auf 9
+                cv2.line(hand_mask, pt1, pt2, 255, thickness=finger_thickness)
 
-            # 2. Moderate Kreise um Gelenke
+            # 3. Kreise um alle Gelenke für bündige Abschlüsse
             for point in hand_points:
-                cv2.circle(hand_mask, tuple(point), 6, 255, -1)  # Erhöht von 4 auf 6
+                cv2.circle(hand_mask, tuple(point), finger_thickness // 2, 255, -1)
 
     # ===== Hand-Maske verfeinern (WENIGER aggressiv) =====
     if np.any(hand_mask > 0):
@@ -229,8 +235,8 @@ while True:
     out_full = np.zeros_like(frame)
     out_full[final_mask > 0] = [255, 255, 255]
 
-    # preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
-    # cv2.imshow('Hybrid Silhouette (gross)', preview)
+    preview = cv2.resize(out_full, (640, 480), interpolation=cv2.INTER_NEAREST)
+    cv2.imshow('Hybrid Silhouette (gross)', preview)
 
     # Variante 1: Mit getRectSubPix (einfachster Weg)
     h, w = out_full.shape[:2]
@@ -246,7 +252,7 @@ while True:
     out_small = cv2.resize(cropped, (32, 48), interpolation=cv2.INTER_AREA)
 
     # cv2.imshow('Hybrid Silhouette (32x32)', out_small)
-    ImagetoMatrix.drawImage(out_small)
+    #ImagetoMatrix.drawImage(out_small)
 
     if cv2.waitKey(1) & 0xFF == 27:
         break
