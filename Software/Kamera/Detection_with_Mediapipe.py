@@ -154,7 +154,7 @@ while True:
             for lm in handLms.landmark:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 hand_points.append([cx, cy])
-
+ 
             # === Erstelle realistische massive Hand-Form ===
 
             # 1. Fülle die Handfläche als Polygon, um Löcher (Skelett-Look) zu vermeiden
