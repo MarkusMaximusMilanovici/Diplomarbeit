@@ -1,0 +1,33 @@
+Black Mirror
+
+Aufbau:
+	Leds oder 
+	Matrix
+	Auflösung 52,2 x 28,8 ( 52,5 x 29 für potenzielle Druckfehler)
+	Camera ( Vermutlich webcam)
+	oder KI gestütztes externes Kamera Modul 
+	https://www.tiktok.com/@cubecatecho/video/7542993951729454366?lang=en-GB
+
+Elektronik
+	Platinen ( Wie groß die Firmen, wie EasyEda, die PLatinen machen können)
+	Multiplexer oder schiebe register (schneller als GPIO)
+	Externen Speicherchip
+	MAX7219 oder einfach selber platine bauen mit mehreren smd Leds ( kosten abhängig)
+	Nucleo l432kc oder ein raspberry Pi oder ein Arduino
+Plan
+	Richtige Maße für den Spiegel auswählen
+	Die Matrix kaufen oder selber bauen
+	Camera auswählen
+	Camera Teil: Die Erkennung der Person
+	Die Leds so ein und ausschalten dass die Person gespiegelt wird
+	Falls nukleo zu schwer ist dann verwenden wir einen Raspberry Pi 
+	C++ Open CV
+	Erstmals auf einen weißen Hintergrund
+	Dann ohne falls funktioniert
+	
+
+
+Git token
+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
+
+
