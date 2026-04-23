@@ -7,7 +7,7 @@ import time
 serial = spi(port=0, device=0, gpio=noop())
 
 # Device initialisieren
-device = max7219(serial, block_orientation=-90, width=32, height=48)
+device = max7219(serial, block_orientation=-90, width=16, height=2)
 
 # Helligkeit einstellen
 device.contrast(10)
