@@ -18,7 +18,6 @@ device.contrast(10)
 # ALLE LEDs AN
 with canvas(device) as draw:
     draw.rectangle(device.bounding_box, fill="white")
-
-# Optional: dauerhaft an lassen
-while True:
+    time.sleep(1)
+    draw.rectangle(device.bounding_box, fill="black")
     time.sleep(1)
