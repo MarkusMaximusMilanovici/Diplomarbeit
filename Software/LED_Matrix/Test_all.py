@@ -20,5 +20,5 @@ with canvas(device) as draw:
     while True:
         draw.rectangle(device.bounding_box, fill="white")
         time.sleep(1)
-        draw.rectangle(device.bounding_box, fill="black")
+        device.clear()
         time.sleep(1)
