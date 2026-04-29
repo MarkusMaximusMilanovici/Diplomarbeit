@@ -4,7 +4,7 @@ from luma.core.render import canvas
 import time
 
 # Anzahl deiner Matrizen (z.B. 4 für ein Modul)
-NUM_MATRICES = 4
+NUM_MATRICES = 32
 
 # SPI Setup
 serial = spi(port=0, device=0, gpio=noop())
