@@ -5,7 +5,7 @@ from luma.core.render import canvas
 
 # ===== KONFIGURATION =====
 # 1 Modul = 4 einzelne 8x8 LED-Matrizen
-COLS = 16
+COLS = 4
 ROWS = 1
 NUM_MATRICES = COLS * ROWS
 BRIGHTNESS = 5
