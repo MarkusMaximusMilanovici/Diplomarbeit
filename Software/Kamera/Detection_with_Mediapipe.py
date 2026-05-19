@@ -205,10 +205,19 @@ while True:
     kernel_denoise = np.ones((3, 3), np.uint8)
     ki_mask = cv2.morphologyEx(ki_mask, cv2.MORPH_CLOSE, kernel_denoise, iterations=1)
 
-    # Bewegungsmaske
+    # Bewegungsmaske (KNN) erzeugen und aufräumen
     fgmask = fgbg.apply(gray, learningRate=0)
 
-    final_mask = ki_mask.copy()
+    # Gewichtete Kombination: KI-Maske als Basis, KNN ergänzt nur dort
+    # wo auch tatsächlich Bewegung erkannt wird (weniger Rauschen als OR)
+    ki_float = ki_mask.astype(np.float32) / 255.0
+    knn_float = fgmask.astype(np.float32) / 255.0
+
+    # KI bleibt voll erhalten (Gewicht 1.0), KNN wird nur mit 0.3 beigemischt
+    # Dadurch werden KNN-only Bereiche nur übernommen wenn sie stark genug sind
+    combined = np.clip(ki_float + knn_float * 0.2, 0, 1)
+    final_mask = (combined * 255).astype(np.uint8)
+    _, final_mask = cv2.threshold(final_mask, 100, 255, cv2.THRESH_BINARY)
 
     # Bilateral Filter
     final_mask = cv2.bilateralFilter(final_mask, 5, 50, 50)
