@@ -281,7 +281,7 @@ while True:
     cv2.imshow('Hybrid Silhouette (32x32)', out_small)
 
     # Matrix Ausgabe
-    #ImagetoMatrix.drawImage(out_small)
+    ImagetoMatrix.drawImage(out_small)
 
     # ESC
     if cv2.waitKey(1) & 0xFF == 27:
